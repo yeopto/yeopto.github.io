@@ -23,24 +23,24 @@ const globalStyle = css`
 
     font-size: 20px;
   }
-`
+`;
 
 const TextStyle = css`
   font-size: 18px;
   font-weight: 700;
   color: gray;
-`
+`;
 const Text1 = styled.div<{ disable: boolean }>`
   font-size: 20px;
   font-weight: 700;
   text-decoration: ${({ disable }) => (disable ? 'line-through' : 'none')};
-`
+`;
 
 const Text2 = styled('div')<{ disable: boolean }>(({ disable }) => ({
   fontSize: '15px',
   color: 'blue',
   textDecoration: disable ? 'line-through' : 'none',
-}))
+}));
 
 const InfoPage: FunctionComponent<InfoPageProps> = function ({
   data: {
