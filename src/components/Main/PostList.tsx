@@ -2,16 +2,34 @@ import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 import PostItem from 'components/Main/PostItem';
 
-const POST_ITEM_DATA = {
-  title: 'Test',
-  date: '2022.10.04.',
-  categories: ['Web', 'Frontend', 'Testing'],
-  summary:
-    '테스트 중입니다..',
-  thumbnail:
-    'https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ',
-  link: 'https://www.google.co.kr/',
-}
+export type PostType = {
+  node: {
+    id: string;
+    frontmatter: {
+      title: string;
+      summary: string;
+      date: string;
+      categories: string[];
+      thumbnail: {
+        publicURL: string;
+      };
+    };
+  };
+};
+
+type PostListProps = {
+  posts: PostType[];
+};
+
+// const POST_ITEM_DATA = {
+//   title: 'Test',
+//   date: '2022.10.04.',
+//   categories: ['Web', 'Frontend', 'Testing'],
+//   summary: '테스트 중입니다..',
+//   thumbnail:
+//     'https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ',
+//   link: 'https://www.google.co.kr/',
+// };
 
 const PostListWrapper = styled.div`
   display: grid;
@@ -28,13 +46,12 @@ const PostListWrapper = styled.div`
   }
 `;
 
-const PostList: FunctionComponent = function () {
+const PostList: FunctionComponent<PostListProps> = function ({ posts }) {
   return (
     <PostListWrapper>
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
-      <PostItem {...POST_ITEM_DATA} />
+      {posts.map(({ node: { id, frontmatter } }: PostType) => (
+        <PostItem {...frontmatter} link="https://www.google.co.kr/" key={id} />
+      ))}
     </PostListWrapper>
   );
 };
