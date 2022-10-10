@@ -11,6 +11,9 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   height: 120px;
   margin-bottom: 30px;
   border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
 
   @media (max-width: 768px) {
     width: 80px;
@@ -18,7 +21,9 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   }
 `;
 
-const ProfileImage: FunctionComponent<PorfileImageProps> = function ( {profileImage} ) {
+const ProfileImage: FunctionComponent<PorfileImageProps> = function ({
+  profileImage,
+}) {
   return <ProfileImageWrapper image={profileImage} alt="Profile Image" />;
 };
 
