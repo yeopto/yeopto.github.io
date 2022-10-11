@@ -1,21 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import styled from '@emotion/styled';
 import PostItem from 'components/Main/PostItem';
 import { PostListItemType } from 'types/PostItem.types';
 
 type PostListProps = {
+  selectedCategory: string;
   posts: PostListItemType[];
 };
-
-// const POST_ITEM_DATA = {
-//   title: 'Test',
-//   date: '2022.10.04.',
-//   categories: ['Web', 'Frontend', 'Testing'],
-//   summary: '테스트 중입니다..',
-//   thumbnail:
-//     'https://play-lh.googleusercontent.com/V_P-I-UENK93ahkQgOWel8X8yFxjhOOfMAZjxXrqp311Gm_RBtlDXHLQhwFZN8n4aIQ',
-//   link: 'https://www.google.co.kr/',
-// };
 
 const PostListWrapper = styled.div`
   display: grid;
@@ -32,10 +23,27 @@ const PostListWrapper = styled.div`
   }
 `;
 
-const PostList: FunctionComponent<PostListProps> = function ({ posts }) {
+const PostList: FunctionComponent<PostListProps> = function ({
+  selectedCategory,
+  posts,
+}) {
+  const postListData = useMemo(
+    () =>
+      posts.filter(
+        ({
+          node: {
+            frontmatter: { categories },
+          },
+        }: PostListItemType) =>
+          selectedCategory !== 'All'
+            ? categories.includes(selectedCategory)
+            : true,
+      ),
+    [selectedCategory],
+  );
   return (
     <PostListWrapper>
-      {posts.map(({ node: { id, frontmatter } }: PostListItemType) => (
+      {postListData.map(({ node: { id, frontmatter } }: PostListItemType) => (
         <PostItem {...frontmatter} link="https://www.google.co.kr/" key={id} />
       ))}
     </PostListWrapper>
