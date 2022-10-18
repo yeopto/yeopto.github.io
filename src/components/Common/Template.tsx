@@ -40,7 +40,15 @@ const Template: FunctionComponent<TemplateProps> = function ({
         <meta property="og:image" content={image} />
         <meta property="og:url" content={url} />
         <meta property="og:site_name" content={title} />
-        <meta name="google-site-verification" content="ql22z_2Y_hxY79KKMHs_pLQVmom92VRl7YZ-86hVhZo" />
+        
+        <meta
+          name="google-site-verification"
+          content="ql22z_2Y_hxY79KKMHs_pLQVmom92VRl7YZ-86hVhZo"
+        />
+        <meta
+          name="naver-site-verification"
+          content="afb35c954ef587db6a8825631a9011d9d7652fdb"
+        />
 
         <html lang="ko" />
       </Helmet>
