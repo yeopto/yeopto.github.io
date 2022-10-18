@@ -1,23 +1,27 @@
 import React, { createRef, FunctionComponent, useEffect } from 'react';
 import styled from '@emotion/styled';
 
-const src = 'https://utteranc.es/client.js';
-const repo = 'yeopto/yeopto.github.io';
+const src = 'https://giscus.app/client.js';
 
 type UtterancesAttributesType = {
   src: string;
-  repo: string;
-  'issue-term': string;
-  label: string;
-  theme: string;
+  'data-repo': string;
+  'data-repo-id': string;
+  'data-category': string;
+  'data-category-id': string;
+  'data-mapping': string;
+  'data-strict': string;
+  'data-reactions-enabled': string;
+  'data-emit-metadata': string;
+  'data-input-position': string;
+  'data-theme': string;
+  'data-lang': string;
   crossorigin: string;
   async: string;
 };
 
 const UtterancesWrapper = styled.div`
-  @media (max-width: 768px) {
-    padding: 0 20px;
-  }
+  padding: 0 20px;
 `;
 
 const CommentWidget: FunctionComponent = function () {
@@ -30,10 +34,17 @@ const CommentWidget: FunctionComponent = function () {
 
     const attributes: UtterancesAttributesType = {
       src,
-      repo,
-      'issue-term': 'pathname',
-      label: 'Comment',
-      theme: `github-light`,
+      'data-repo': 'yeopto/yeopto.github.io',
+      'data-repo-id': 'R_kgDOIBgOPA',
+      'data-category': 'Comments',
+      'data-category-id': 'DIC_kwDOIBgOPM4CSDAL',
+      'data-mapping': 'pathname',
+      'data-strict': '0',
+      'data-reactions-enabled': '0',
+      'data-emit-metadata': '0',
+      'data-input-position': 'bottom',
+      'data-theme': 'light',
+      'data-lang': 'ko',
       crossorigin: 'anonymous',
       async: 'true',
     };
