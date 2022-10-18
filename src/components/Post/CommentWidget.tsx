@@ -1,4 +1,5 @@
 import React, { createRef, FunctionComponent, useEffect } from 'react';
+import styled from '@emotion/styled';
 
 const src = 'https://utteranc.es/client.js';
 const repo = 'yeopto/yeopto.github.io';
@@ -13,13 +14,19 @@ type UtterancesAttributesType = {
   async: string;
 };
 
+const UtterancesWrapper = styled.div`
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+`;
+
 const CommentWidget: FunctionComponent = function () {
-  const element = createRef<HTMLDivElement>()
+  const element = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    if (element.current === null) return
+    if (element.current === null) return;
 
-    const utterances: HTMLScriptElement = document.createElement('script')
+    const utterances: HTMLScriptElement = document.createElement('script');
 
     const attributes: UtterancesAttributesType = {
       src,
@@ -29,16 +36,16 @@ const CommentWidget: FunctionComponent = function () {
       theme: `github-light`,
       crossorigin: 'anonymous',
       async: 'true',
-    }
+    };
 
     Object.entries(attributes).forEach(([key, value]) => {
-      utterances.setAttribute(key, value)
-    })
+      utterances.setAttribute(key, value);
+    });
 
-    element.current.appendChild(utterances)
-  }, [])
+    element.current.appendChild(utterances);
+  }, []);
 
-  return <div ref={element} />
-}
+  return <UtterancesWrapper ref={element} />;
+};
 
-export default CommentWidget
+export default CommentWidget;
