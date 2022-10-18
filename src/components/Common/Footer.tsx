@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 
-const FooterWrapper = styled.div`
+const FooterWrapper = styled.footer`
   display: grid;
   place-items: center;
   margin-top: auto;
@@ -17,7 +17,7 @@ const FooterWrapper = styled.div`
 const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
-      반갑습니다, 개발중입니다.
+      반갑습니다. 누군가에겐 도움이 되는 글을 쓰도록 노력하겠습니다.
       <br />© October.2022 yeopto, Powered By Gatsby.
     </FooterWrapper>
   );

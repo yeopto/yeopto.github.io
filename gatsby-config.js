@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Yeopto's Blog`,
     description: `Yeopto의 개발 성장 이야기`,
-    author: `@Yeopto`,
+    author: `Yeopto`,
     siteUrl: 'https://yeopto.github.io/',
   },
   plugins: [
@@ -39,6 +39,13 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
