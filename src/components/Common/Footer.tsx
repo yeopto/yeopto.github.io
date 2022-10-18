@@ -17,7 +17,7 @@ const FooterWrapper = styled.footer`
 const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
-      반갑습니다, 개발중입니다.
+      반갑습니다. 누군가에겐 도움이 되는 글을 쓰도록 노력하겠습니다.
       <br />© October.2022 yeopto, Powered By Gatsby.
     </FooterWrapper>
   );

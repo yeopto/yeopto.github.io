@@ -21,7 +21,11 @@ type UtterancesAttributesType = {
 };
 
 const UtterancesWrapper = styled.div`
-  padding: 0 20px;
+  padding: 0 30px;
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 const CommentWidget: FunctionComponent = function () {
