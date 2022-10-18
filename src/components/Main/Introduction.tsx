@@ -65,6 +65,10 @@ const Icon = styled.img`
   height: 40px;
   border-radius: 50%;
 
+  &:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
   @media (max-width: 768px) {
     width: 30px;
     height: 30px;

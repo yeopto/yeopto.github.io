@@ -3,7 +3,7 @@ date: '2022-10-11'
 title: '다 만들어 간다..!'
 categories: ['Test', 'interrupt', 'ISR']
 summary: '좀 더 빨리 만들걸... 사진은 인터럽트 발생 과정'
-thumbnail: './test copy.png'
+thumbnail: './test.png'
 ---
 
 ### 1. 인터럽트는 무엇일까?
