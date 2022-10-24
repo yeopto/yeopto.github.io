@@ -81,11 +81,11 @@ const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = function ({
   date,
   categories,
 }) {
-  const goBackPage = () => window.history.back();
+  const goHomePage = () => window.location.assign("https://yeopto.github.io");
 
   return (
     <PostHeadInfoWrapper>
-      <PrevPageIcon onClick={goBackPage}>
+      <PrevPageIcon onClick={goHomePage}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </PrevPageIcon>
       <Title>{title}</Title>
