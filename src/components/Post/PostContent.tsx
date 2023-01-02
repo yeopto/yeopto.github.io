@@ -29,13 +29,13 @@ const MarkdownRenderer = styled.div`
   h2,
   h3 {
     font-weight: 800;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 
   * + h1,
   * + h2,
   * + h3 {
-    margin-top: 80px;
+    margin-top: 40px;
   }
 
   hr + h1,
@@ -74,7 +74,7 @@ const MarkdownRenderer = styled.div`
   // Adjust Horizontal Rule style
   hr {
     border: 1px solid #000000;
-    margin: 100px 0;
+    margin: 50px 0;
   }
 
   // Adjust Link Element Style
@@ -124,7 +124,7 @@ const MarkdownRenderer = styled.div`
     }
 
     hr {
-      margin: 50px 0;
+      margin: 25px 0;
     }
   }
 `;
