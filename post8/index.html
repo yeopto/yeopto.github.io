@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 4.23.0"/><meta data-react-helmet="true" name="description" content="중첩 객체까지 동결할 수 있는 방법"/><meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1.0"/><meta data-react-helmet="true" http-equiv="Content-Type" content="text/html;charset=UTF-8"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" property="og:title" content="JavaScript에서 객체 동결"/><meta data-react-helmet="true" property="og:description" content="중첩 객체까지 동결할 수 있는 방법"/><meta data-react-helmet="true" property="og:image" content="/static/99c26c81d2ef42e45137333c8f29aa28/javascript.png"/><meta data-react-helmet="true" property="og:url"/><meta data-react-helmet="true" property="og:site_name" content="JavaScript에서 객체 동결"/><meta data-react-helmet="true" name="google-site-verification" content="ql22z_2Y_hxY79KKMHs_pLQVmom92VRl7YZ-86hVhZo"/><meta data-react-helmet="true" name="naver-site-verification" content="afb35c954ef587db6a8825631a9011d9d7652fdb"/><style data-href="/styles.811b76fa2f764e4356d7.css" data-identity="gatsby-global-css">code[class*=language-],pre[class*=language-]{word-wrap:normal;background:none;color:#ccc;font-family:Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;font-size:1em;-webkit-hyphens:none;hyphens:none;line-height:1.5;-o-tab-size:4;tab-size:4;text-align:left;white-space:pre;word-break:normal;word-spacing:normal}pre[class*=language-]{margin:.5em 0;overflow:auto;padding:1em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#2d2d2d}:not(pre)>code[class*=language-]{border-radius:.3em;padding:.1em;white-space:normal}.token.block-comment,.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#999}.token.punctuation{color:#ccc}.token.attr-name,.token.deleted,.token.namespace,.token.tag{color:#e2777a}.token.function-name{color:#6196cc}.token.boolean,.token.function,.token.number{color:#f08d49}.token.class-name,.token.constant,.token.property,.token.symbol{color:#f8c555}.token.atrule,.token.builtin,.token.important,.token.keyword,.token.selector{color:#cc99cd}.token.attr-value,.token.char,.token.regex,.token.string,.token.variable{color:#7ec699}.token.entity,.token.operator,.token.url{color:#67cdcc}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}.token.inserted{color:green}</style><link rel="canonical" href="https://yeopto.github.io/post8/" data-baseprotocol="https:" data-basehost="yeopto.github.io"/><title data-react-helmet="true">JavaScript에서 객체 동결</title><style>.gatsby-image-wrapper{position:relative;overflow:hidden}.gatsby-image-wrapper picture.object-fit-polyfill{position:static!important}.gatsby-image-wrapper img{bottom:0;height:100%;left:0;margin:0;max-width:none;padding:0;position:absolute;right:0;top:0;width:100%;object-fit:cover}.gatsby-image-wrapper [data-main-image]{opacity:0;transform:translateZ(0);transition:opacity .25s linear;will-change:opacity}.gatsby-image-wrapper-constrained{display:inline-block;vertical-align:top}</style><noscript><style>.gatsby-image-wrapper noscript [data-main-image]{opacity:1!important}.gatsby-image-wrapper [data-placeholder-image]{opacity:0!important}</style></noscript><script type="module">const e="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;e&&document.body.addEventListener("load",(function(e){const t=e.target;if(void 0===t.dataset.mainImage)return;if(void 0===t.dataset.gatsbyImageSsr)return;let a=null,n=t;for(;null===a&&n;)void 0!==n.parentNode.dataset.gatsbyImageWrapper&&(a=n.parentNode),n=n.parentNode;const o=a.querySelector("[data-placeholder-image]"),r=new Image;r.src=t.currentSrc,r.decode().catch((()=>{})).then((()=>{t.style.opacity=1,o&&(o.style.opacity=0,o.style.transition="opacity 500ms linear")}))}),!0);</script><link rel="sitemap" type="application/xml" href="/sitemap/sitemap-index.xml"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion="css 13ku56z">.css-13ku56z{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;height:100%;}</style><main class="css-13ku56z e1strnqo0"><style data-emotion="css-global pijd4z">@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');*{padding:0;margin:0;box-sizing:border-box;font-family:'Nanum Myeongjo',serif;}html,body,#___gatsby{height:100%;}a,a:hover{color:inherit;-webkit-text-decoration:none;text-decoration:none;cusor:pointer;}</style><style data-emotion="css 16cz9yp">.css-16cz9yp{position:relative;width:100%;height:400px;}@media (max-width: 768px){.css-16cz9yp{height:300px;}}</style><div class="css-16cz9yp e1opi4mu1"><style data-emotion="css 1bjn9yo">.css-1bjn9yo{z-index:-1;width:100%;height:400px;object-fit:cover;-webkit-filter:brightness(0.25);filter:brightness(0.25);}@media (max-width: 768px){.css-1bjn9yo{height:300px;}}</style><div data-gatsby-image-wrapper="" style="position:absolute" class="gatsby-image-wrapper gatsby-image-wrapper-constrained css-1bjn9yo e1opi4mu0"><div style="max-width:1800px;display:block"><img alt="" role="presentation" aria-hidden="true" src="data:image/svg+xml;charset=utf-8,%3Csvg height=&#x27;1012&#x27; width=&#x27;1800&#x27; xmlns=&#x27;http://www.w3.org/2000/svg&#x27; version=&#x27;1.1&#x27;%3E%3C/svg%3E" style="max-width:100%;display:block;position:static"/></div><img aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAABtklEQVQoz2P4cCsAF3p/M+D7g8B/z4I+3Ql8dyPg6/2A/8+D/z0L/nIPJPXhVgADHp3f7gee3OG5YIrT43N+Px8FXj3kM73bcc4Ex3unfL/eC3x/E7fmN9f9/78I7mywk5bTuXbE59YxHzs7I3VNPUUlXVdn40fn/D7fwa35LVhzf6u9qrruo3O+s/ud5BR0T2z3PLXTc/YEx3c3Aj7eJqS5r8VeWVX3/hnftfNc5RR0aktsHp/z/f8m5NMd3M5+fzPg9TWw5mZ7NXW9K4e8P9wKyEy2lJXX1dXVb6+1e4vH5s93Ar7cDfz3DGSzmobexf3e/18Ef3sUuGmxa1SouYy8zpROh9+Pg7Bo/ng74Pklv5PbPf+/D+lvsVdV07t+xOfCPu8dK9z+fw59dyfAytIwKdbi671AdM3vbgT8ehzU1QAKp7pSGztbI1sbo7fX/bNAbtapKLAuyraWU9DtqLf7hWnz+5sgB18/4pObamlmZujnbbpzpfuvR4F3TvhUFlpbWxlZWxnWltg8u4gjqiDJ49v9wFdX/T/cCvj+EBSwX+8F/ngY+Oaa/5vr/t8fBn6+CwptAJdrjPYzZvDjAAAAAElFTkSuQmCC" alt=""/><picture><source type="image/webp" data-srcset="/static/99c26c81d2ef42e45137333c8f29aa28/06689/javascript.webp 450w,/static/99c26c81d2ef42e45137333c8f29aa28/eca74/javascript.webp 900w,/static/99c26c81d2ef42e45137333c8f29aa28/23de5/javascript.webp 1800w" sizes="(min-width: 1800px) 1800px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 1800px) 1800px, 100vw" decoding="async" loading="lazy" data-src="/static/99c26c81d2ef42e45137333c8f29aa28/ddad7/javascript.png" data-srcset="/static/99c26c81d2ef42e45137333c8f29aa28/602a4/javascript.png 450w,/static/99c26c81d2ef42e45137333c8f29aa28/4c0f7/javascript.png 900w,/static/99c26c81d2ef42e45137333c8f29aa28/ddad7/javascript.png 1800w" alt="thumbnail"/></picture><noscript><picture><source type="image/webp" srcSet="/static/99c26c81d2ef42e45137333c8f29aa28/06689/javascript.webp 450w,/static/99c26c81d2ef42e45137333c8f29aa28/eca74/javascript.webp 900w,/static/99c26c81d2ef42e45137333c8f29aa28/23de5/javascript.webp 1800w" sizes="(min-width: 1800px) 1800px, 100vw"/><img data-gatsby-image-ssr="" data-main-image="" style="opacity:0" sizes="(min-width: 1800px) 1800px, 100vw" decoding="async" loading="lazy" src="/static/99c26c81d2ef42e45137333c8f29aa28/ddad7/javascript.png" srcSet="/static/99c26c81d2ef42e45137333c8f29aa28/602a4/javascript.png 450w,/static/99c26c81d2ef42e45137333c8f29aa28/4c0f7/javascript.png 900w,/static/99c26c81d2ef42e45137333c8f29aa28/ddad7/javascript.png 1800w" alt="thumbnail"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1,e.parentNode.parentNode.querySelector("[data-placeholder-image]").style.opacity=0)}}</script></div><style data-emotion="css m1156n">.css-m1156n{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;height:100%;margin:0 auto;padding:60px 0;color:#ffffff;}@media (max-width: 768px){.css-m1156n{width:100%;padding:40px 20px;}}</style><div class="css-m1156n e1st1jau3"><style data-emotion="css gywgo7">.css-gywgo7{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#ffffff;color:#000000;font-size:22px;cursor:pointer;box-shadow:0 0 10px rgba(0, 0, 0, 0.3);}@media (max-width: 768px){.css-gywgo7{width:30px;height:30px;font-size:18px;}}</style><div class="css-gywgo7 e1st1jau2"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></div><style data-emotion="css gn4qtp">.css-gn4qtp{display:-webkit-box;overflow:hidden;overflow-wrap:break-word;margin-top:auto;text-overflow:ellipsis;white-space:normal;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:45px;font-weight:800;}@media (max-width: 768px){.css-gn4qtp{font-size:30px;}}</style><div class="css-gn4qtp e1st1jau1">JavaScript에서 객체 동결</div><style data-emotion="css 3gcnt2">.css-3gcnt2{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin-top:10px;font-size:18px;font-weight:700;}@media (max-width: 768px){.css-3gcnt2{-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-align-items:flex-start;-webkit-box-align:flex-start;-ms-flex-align:flex-start;align-items:flex-start;font-size:15px;font-weight:400;}}</style><div class="css-3gcnt2 e1st1jau0"><div>JS</div><div>2023.01.10.</div></div></div></div><style data-emotion="css 1mqn3zs">.css-1mqn3zs{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;width:768px;margin:0 auto;padding:100px 0;word-break:break-all;line-height:1.8;font-size:16px;font-weight:400;}.css-1mqn3zs p{padding:3px 0;}.css-1mqn3zs h1,.css-1mqn3zs h2,.css-1mqn3zs h3{font-weight:800;margin-bottom:10px;}.css-1mqn3zs *+h1,.css-1mqn3zs *+h2,.css-1mqn3zs *+h3{margin-top:40px;}.css-1mqn3zs hr+h1,.css-1mqn3zs hr+h2,.css-1mqn3zs hr+h3{margin-top:0;}.css-1mqn3zs h1{font-size:30px;}.css-1mqn3zs h2{font-size:25px;}.css-1mqn3zs h3{font-size:20px;}.css-1mqn3zs blockquote{margin:30px 0;padding:5px 15px;border-left:2px solid #000000;font-weight:800;}.css-1mqn3zs ol,.css-1mqn3zs ul{margin-left:20px;padding:30px 0;}.css-1mqn3zs hr{border:1px solid #000000;margin:50px 0;}.css-1mqn3zs a{color:#4263eb;-webkit-text-decoration:underline;text-decoration:underline;}.css-1mqn3zs pre[class*='language-']{margin:30px 0;padding:15px;font-size:15px;}.css-1mqn3zs pre[class*='language-']::-webkit-scrollbar-thumb{background:rgba(255, 255, 255, 0.5);border-radius:3px;}.css-1mqn3zs code[class*='language-'],.css-1mqn3zs pre[class*='language-']{tab-size:2;}@media (max-width: 768px){.css-1mqn3zs{width:100%;padding:80px 20px;line-height:1.6;font-size:14px;}.css-1mqn3zs h1{font-size:23px;}.css-1mqn3zs h2{font-size:20px;}.css-1mqn3zs h3{font-size:17px;}.css-1mqn3zs img{width:100%;}.css-1mqn3zs hr{margin:25px 0;}}</style><div class="css-1mqn3zs e1ijh0y10"><p>최종 코딩 테스트 문제를 다시 구현해보았다. <a href="https://yeopto.github.io/post7/" target="_blank" rel="nofollow"><strong>이 글</strong></a>에서 Java로 구현된 코드에선 shuffle메서드를 사용하기 위해 Enum 클래스를 활용하는 것 같았다고 말했었는데, 다시 공부하여 구현해보니 shuffle 메서드의 인자로 원소가 숫자가 아닌 배열이 들어오면 오류를 뱉어내는 것과 Enum 객체 활용과는 상관이 없었다..(그 당시, Java에서 Enum 객체를 만들면 그 열거되어있는 필드 순서대로 인덱스 마냥 숫자를 뽑을 수 있는 내장 메서드가 있나 싶었다..ㅎ) 단순히 음식이 나열 되어 있는 배열 원소의 인덱스들로 새 배열을 만들어서 그 배열을 shuffle의 인자로 넘겨주면 됐었다.. 어찌보면 단순했었는데 시험 전 날엔 왜 그렇게 생각할 수 없었을까.. 난 바보였다.(<strong>한 마디로 내가 막힌 shuffle 메서드에서의 문제는 Enum과 전혀 관련 없다는 것이다 ^_^</strong>)</p>
+<br>
+<p>서론이 너무 길었다. Enum에 대해 시험 전 날 공부를 하면서 안 것이 있었다. JavaScript에서 Enum의 역할을하는 객체를 만들기 위해선 Object.freeze()를 해주면 된다고 했다. 그러면서 객체 동결에 대해 알았던 것 같다. Enum은 상수가 열거되어있는 것이므로 외부로 인해 값이 변경되면 안되고 그래서 불변 객체여야하는데 그러기 위해 Object.freeze()를 사용하는 것이었다. 최종 코딩 테스트 문제를 다시 구현해보면서 활용하라고 주어진 카테고리와 메뉴에 대한 데이터는 외부로 인해 변경되면 안된다고 생각했기 때문에 그 데이터들을 Object.freeze()를 해주었다. 그런데 minuet이 코드리뷰를 해주며 이 부분에 대해서 하나 알려주었다..</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/270fd04abe7a97aaf0370d0e158e6490/b5cb9/minuet_review.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 89.58333333333334%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAACXBIWXMAABYlAAAWJQFJUiTwAAACJ0lEQVQ4y61U23KjMAzlvZeQBHM1YGNzh0BmszNpm+lenvb/f+jsyECSdjuZdmYfDpIlWcjWkS0WCMiiQ5TmSFSNJKvNWuYtVLmDrnZIdQOZTzaRt0hVbWwEj2e4WzHc266BZTshvDAFJXYCAS8kmWLrJRP8Sd/MmGwX6ZDfTxCmBSJRwnKDFMOwR9M+4TCMGLsaHtdwQwk3yj4FFkoESQ4/1rAcL0ZdNdD1iLwaoco9kmIHjysTuGxY4EbS/MzoV3YCVW1tXI6saCF0j0JXULqGF+efrm75IUk6vsVCgVS388W3WLMQD2sPjxv/y6B91trlYHMjqDE2i7DaBqBmrWY8boNJ34Zv5azbToQ17XNCWJSAKqQOJapBnNUQRQ8uq3ndQFWD0VPdGSmL3SU270xDzJEDAYuyLjSZKhWT9FOjk48aQdUv1KI7W3wUO9EqxppxWPRZKly6tWz6Z32V7L2PKiTOmoTEn/7bszkmBXylw9dwloS0aPdHcy/XNGDveHYLbyqkxeHpF8r+8H8S0lQM30/gWX115Hn0PpiImwmJNnSHsujhxXoOyD7ccBNcTbShhFP25EwF0s/jNFPFEN6JJhK7/ALGjc9IIrbPJVTZQqjKQJUddNlB6BqqaJHljbFv3Qj21je4e9hcsHLOb6F5DwPRQu9/QnTPEM0R1eE3uuMfiO4Fsj8h252gxh/Q4yvU8ArZv4CJAUyOBrYncG8zM8c0y38B7cveQDR7o5YAAAAASUVORK5CYII='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/270fd04abe7a97aaf0370d0e158e6490/a59e9/minuet_review.webp 192w,
+/static/270fd04abe7a97aaf0370d0e158e6490/0ca9f/minuet_review.webp 384w,
+/static/270fd04abe7a97aaf0370d0e158e6490/dc9b9/minuet_review.webp 768w,
+/static/270fd04abe7a97aaf0370d0e158e6490/e2c2f/minuet_review.webp 1152w,
+/static/270fd04abe7a97aaf0370d0e158e6490/aa71c/minuet_review.webp 1532w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/270fd04abe7a97aaf0370d0e158e6490/3b721/minuet_review.png 192w,
+/static/270fd04abe7a97aaf0370d0e158e6490/66595/minuet_review.png 384w,
+/static/270fd04abe7a97aaf0370d0e158e6490/fe486/minuet_review.png 768w,
+/static/270fd04abe7a97aaf0370d0e158e6490/d2d74/minuet_review.png 1152w,
+/static/270fd04abe7a97aaf0370d0e158e6490/b5cb9/minuet_review.png 1532w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/270fd04abe7a97aaf0370d0e158e6490/fe486/minuet_review.png"
+            alt="미누리뷰"
+            title="미누리뷰"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<br>
+<p>Object.freeze()는 얕은 동결로, 중첩 객체까지는 영향을 주지 못한다고 한다. 직접 실행해본 결과 양식에 돈가스가 추가되는 것을 확인하였다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/45494ae89a9e2988d54abb8633d756b7/0ba95/error_output.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 92.70833333333334%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAABxUlEQVQ4y52U66rbMBCE/Ron1uq2Wl0cKXF8knNpaaHv/1BToiQnKYXS+MfHGgTDzO7gIYYAiYz5tGBXtjBag0hD63UMzAEheJQt41gLhBlKUX8koucFRQRBPOouYqkF7N3VJa1z2AWD64I/lh0OU+6iqwUvkR2mJji1CTEwRqW+ItNawdoi5pLgnXsQoacPNIhEpOiRgwcp6gchNV6glTtkCTApIEjANEW4XOHyuULquku6xP8PBokBXhi2bJGyoBaB5IiUE4QtjDHPOTwfI9WI8vYLh9MRx6Vh//kdy+kVc8tw9knBmAMkMbxnhB5fYEMCS4KxFlqb7tIYfZ3/ZnDOoWMt9q1CvIM4g8geavMCPb6AxhFqpDvqhuqM49jpOyw5o+1mxFLBhw+Y5Rv0/Ak3v4PnN+jXn5DWUBaLPHvkg0OZPHKK2NaK1hr2+z3meUaMEUOIAr9U+JJ7VCMXbIgdIxmOGV4MXLB9em97Iu89mPkLay0GZTU2xwnm3MPN5t7BjnqY9Cd0j3yjRyZvoU5b6Mig6J+uyV9XJmcwvlfolqAfKkKrBb3FeNrCBIa+tr0/Pn4/I+jO9UgMOrsjWv2XuQn+BuL/DDvQlHEiAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/45494ae89a9e2988d54abb8633d756b7/a59e9/error_output.webp 192w,
+/static/45494ae89a9e2988d54abb8633d756b7/0ca9f/error_output.webp 384w,
+/static/45494ae89a9e2988d54abb8633d756b7/dc9b9/error_output.webp 768w,
+/static/45494ae89a9e2988d54abb8633d756b7/e2c2f/error_output.webp 1152w,
+/static/45494ae89a9e2988d54abb8633d756b7/77061/error_output.webp 1274w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/45494ae89a9e2988d54abb8633d756b7/3b721/error_output.png 192w,
+/static/45494ae89a9e2988d54abb8633d756b7/66595/error_output.png 384w,
+/static/45494ae89a9e2988d54abb8633d756b7/fe486/error_output.png 768w,
+/static/45494ae89a9e2988d54abb8633d756b7/d2d74/error_output.png 1152w,
+/static/45494ae89a9e2988d54abb8633d756b7/0ba95/error_output.png 1274w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/45494ae89a9e2988d54abb8633d756b7/fe486/error_output.png"
+            alt="오류"
+            title="오류"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<br>
+<p>객체의 중첩 객체까지 동결하여 변경이 불가능한 읽기 전용의 불변 객체를 구현하려면 객체를 값으로 갖는 모든 프로퍼티에 대해 재귀적으로 Object.freeze 메서드를 호출해야 한다고 한다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/f6d3561689e9d2f83296d77b6b9beda3/7e08f/deepFreeze.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 49.479166666666664%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABb0lEQVQoz42T3Y7bIBCF8xqtMX9jDDYGnDjdjSqt9v2f6qtsdyP1otpcfBJixNGZmcPFGIMTIV836uM3y+OD9OuDUhviNH2v0fqk7/vn+X9crLV4b9m2mdYaUwqEMSIyojqFUopOqafYd6IXZx1D8Mw58P74JD8+8ePE3K6knEljoE4R7+xrDo2xiFjmGmnLiiwZlxdKLbQaybVR1hWrT5c7u+sv+i/6s36xu8PBMS8j4/bGsC7crpnbVij3B0uZjpE479HWYaxDxB9473FesDJgncfsDkXkKTisK9Iyt5Zo9xvL9karibVNzLXgQsKFidYW1jVTysxUrsR2J+WCOHsK7i3nmphkIgyRWG9obeh+/qDr1IHqurMtpZ53XdehVHfU1N/FXUIYCcGRgsNqg91j5AWt++Ox7tW3i/hnKcccnMMMI0YGjIzHnOwQsSFhJZxxeVUwxUicZuL1DT8VJK9IiMhc8TtxZs/q/gFe4Q8hDhlDXSUI/QAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/f6d3561689e9d2f83296d77b6b9beda3/a59e9/deepFreeze.webp 192w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/0ca9f/deepFreeze.webp 384w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/dc9b9/deepFreeze.webp 768w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/e2c2f/deepFreeze.webp 1152w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/0157a/deepFreeze.webp 1186w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/f6d3561689e9d2f83296d77b6b9beda3/3b721/deepFreeze.png 192w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/66595/deepFreeze.png 384w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/fe486/deepFreeze.png 768w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/d2d74/deepFreeze.png 1152w,
+/static/f6d3561689e9d2f83296d77b6b9beda3/7e08f/deepFreeze.png 1186w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/f6d3561689e9d2f83296d77b6b9beda3/fe486/deepFreeze.png"
+            alt="깊은동결"
+            title="깊은동결"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<br>
+<p>deepFreeze 메서드를 하나 만들어 깊은 동결을 적용한 결과 객체내의 객체까지 동결된 것을 확인할 수 있다.</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 768px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/085a2c4c1de703ca38b44c7671a30f6d/05de1/true_output.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 70.83333333333333%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAABdElEQVQ4y6WSWW7cMBBEdY9I4tLcFy3jZGzY9z/XC6RBxgnykYzno9AEARZedXEQcfgg9K2y14xWimmamOf5SxpEBOcttQqXmpl/M/yK8d2w9cC1F0pwT1EOR+STsHne945Y83xk74XWAi2Gz6jTdM5HNXjviUFOsvEJsjuhDwHrD2lcFFy0+Cy4JCitHjd0zmFzw5QVkxdqL2xrJrWK7Res1X+0/s/IznkkFUJdKK0Ql4zkSK+RVDumXc5pjf6vsk5CiQmfGzFHQjtoN2LJzPPE9GhkK8Lxday1tJLPcrxzGK2Zx29n2/M0f+p8+HfU414pxZCSY3s5iDrl+oHdrvj9Fd931PIDKZ3YNWExxGbwKSA+kFIi50xr7TwrfVvJEKMlfy/omJh6Z+oLU+voWpn7iuoVswimCbYJugRsDJiecDni6m3nKsiN8NhhXTZiXZD9Fb2/YbY3/PKCurwjbSOvmrRZ8moJKdCWFaVmxnG861fsn69uhm1aMBSaAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/085a2c4c1de703ca38b44c7671a30f6d/a59e9/true_output.webp 192w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/0ca9f/true_output.webp 384w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/dc9b9/true_output.webp 768w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/e2c2f/true_output.webp 1152w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/a6468/true_output.webp 1414w"
+              sizes="(max-width: 768px) 100vw, 768px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/085a2c4c1de703ca38b44c7671a30f6d/3b721/true_output.png 192w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/66595/true_output.png 384w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/fe486/true_output.png 768w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/d2d74/true_output.png 1152w,
+/static/085a2c4c1de703ca38b44c7671a30f6d/05de1/true_output.png 1414w"
+            sizes="(max-width: 768px) 100vw, 768px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/085a2c4c1de703ca38b44c7671a30f6d/fe486/true_output.png"
+            alt="완료결과"
+            title="완료결과"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<br>
+<p>이 처럼 객체 데이터의 불변성을 보장하기 위해서 다음부터는 deepFreeze를 구현하여 적용시켜야겠다. 외부에서 데이터를 바꿀 수 있게 한다는 것은 치명적인 오류를 범할 수 있다는 걸 프리코스를 하면서 알게되었다. 좋은 정보 알려준 minuet에게 감사를..</p>
+<hr>
+<h3>Reference</h3>
+<ul>
+<li>모던 자바스크립트 Deep Dive 16.5.4 불변 객체</li>
+</ul></div><style data-emotion="css uml20f">.css-uml20f{padding:0 30px;}@media (max-width: 768px){.css-uml20f{padding:0 20px;}}</style><div class="css-uml20f e1gqsjds0"></div><style data-emotion="css 9w9jmx">.css-9w9jmx{display:grid;place-items:center;margin-top:auto;padding:50px 0;font-size:15px;text-align:center;line-height:1.5;}@media (max-width: 768px){.css-9w9jmx{font-size:13px;}}</style><footer class="css-9w9jmx e1oae0v80">반갑습니다. 누군가에겐 도움이 되는 글을 쓰도록 노력하겠습니다.<br/>© October.2022 yeopto, Powered By Gatsby.</footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/post8/";window.___webpackCompilationHash="48dbb2ec1356019686ca";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-c9fa82aa5b1f9c65f078.js"],"app":["/app-c29e6dadd1a2f03a4c11.js"],"component---src-pages-404-tsx":["/component---src-pages-404-tsx-7a237b676ea586cd42d4.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-520629bb2d7342c61fba.js"],"component---src-templates-post-template-tsx":["/component---src-templates-post-template-tsx-56b9989f4903dc112b4f.js"]};/*]]>*/</script><script src="/polyfill-c9fa82aa5b1f9c65f078.js" nomodule=""></script><script src="/app-c29e6dadd1a2f03a4c11.js" async=""></script><script src="/framework-c57a9454c0e3bef16c3b.js" async=""></script><script src="/webpack-runtime-9074d8e6fc94ade80e28.js" async=""></script></body></html>
