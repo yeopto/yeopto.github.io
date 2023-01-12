@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Yeopto's Blog`,
-    description: `Yeopto의 개발 성장 이야기`,
-    author: `Yeopto`,
+    title: `yeopto's Blog`,
+    description: `yeopto의 개발 성장 이야기`,
+    author: `yeopto`,
     siteUrl: 'https://yeopto.github.io/',
   },
   plugins: [
