@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://yeopto.github.io/sitemap/sitemap-index.xml
+Sitemap: https://yeopto.github.io/sitemap.xml
 Host: https://yeopto.github.io
