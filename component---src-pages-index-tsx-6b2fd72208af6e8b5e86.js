@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[691],{4276:function(t,e,n){n.r(e),n.d(e,{default:function(){return a}});var r=n(7294),u=function(t){var e=t.text;return r.createElement("div",null,e)},a=function(){return r.createElement(u,{text:"Home"})}}}]);
-//# sourceMappingURL=component---src-pages-index-tsx-6b2fd72208af6e8b5e86.js.map
