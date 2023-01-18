@@ -21,9 +21,12 @@ type UtterancesAttributesType = {
 };
 
 const UtterancesWrapper = styled.div`
-  padding: 0 30px;
+  display: flex;
+  width: 768px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
+    width: 100%;
     padding: 0 20px;
   }
 `;

@@ -39,10 +39,12 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    'gatsby-plugin-sitemap',
+    'gatsby-plugin-advanced-sitemap',
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
+        host: 'https://yeopto.github.io/',
+        sitemap: 'https://yeopto.github.io/sitemap.xml',
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
