@@ -1,4 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[yeopto's Blog RSS Feed]]></title><description><![CDATA[yeopto의 개발 성장 이야기]]></description><link>https://yeopto.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 26 Feb 2023 14:31:36 GMT</lastBuildDate><item><title><![CDATA[[JS] this 바인딩]]></title><description><![CDATA[yeopto의 개발 성장 이야기]]></description><link>https://yeopto.github.io/JScontents/this_binding/</link><guid isPermaLink="false">https://yeopto.github.io/JScontents/this_binding/</guid><pubDate>Sun, 26 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;로또 미션을 하면서 메서드로 이벤트 핸들러 함수를 만들기도 하고, 만든 것을 다른 메서드 내에서 사용했다. 이벤트 핸들러 함수 내의 this가 이벤트 핸들러 함수를 어떻게 콜백으로 던져줬냐에 따라 this 바인딩이 달라졌다. 그 부분에 대해 알아보자.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[yeopto's Blog RSS Feed]]></title><description><![CDATA[yeopto의 개발 성장 이야기]]></description><link>https://yeopto.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 17 Mar 2023 10:02:36 GMT</lastBuildDate><item><title><![CDATA[[JS] Proxy Pattern]]></title><description><![CDATA[yeopto의 개발 성장 이야기]]></description><link>https://yeopto.github.io/JScontents/proxy/</link><guid isPermaLink="false">https://yeopto.github.io/JScontents/proxy/</guid><pubDate>Fri, 17 Mar 2023 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;설명&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;프록시 객체는 한 객체에 대한 기본 작업을 가로채고 재정의할 수 있다.&lt;/li&gt;
+&lt;li&gt;프록시 패턴은 객체를 직접 다루지 않고 프록시를 통해 다루는 패턴을 말한다.&lt;/li&gt;
+&lt;li&gt;프록시 객체엔 하나의 객체에 접근할 수 있는 getter와 setter가 있다. 프록시 객체의 getter와 setter로 객체에 접근한다.&lt;/li&gt;
+&lt;li&gt;JavaScript에서 프록시는 built-in으로 있는 Proxy object를 사용하여 만들 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;예시&lt;/h2&gt;
+&lt;p&gt;Proxy의 첫번째 인자는 프록시할 원본 객체(target)를 받고, 두번째 인자는 handler 객체를 받는다. 여기서 handler 객체란 프록시에 기능을 추가하는데 사용할 수 있는 처리기 객체이다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; person &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;엽토&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token literal-property property&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; personProxy &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Proxy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;person&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function-variable function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;target&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; property&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; target&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;property&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function-variable function&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;target&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; property&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    target&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;property&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+personProxy&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;제레미&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+console&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;personProxy&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 제레미&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;p&gt;Reflect 객체를 사용하여 좀 더 쉽게 Proxy 객체를 만들 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; personProxy &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Proxy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;person&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function-variable function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;target&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; property&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; Reflect&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; property&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;token function-variable function&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;target&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; property&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; Reflect&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;target&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; property&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;어떻게 활용해볼 수 있을까?&lt;/h2&gt;
+&lt;p&gt;상태(state)에 프록시 객체를 만들어서 프록시 객체 setter에 render함수를 실행시키도록하고, 상태를 프록시 setter로 변경한다면 자동으로 리렌더링 할 수 있게 만들 수 있다.&lt;/p&gt;
+&lt;h2&gt;프록시 패턴 장점&lt;/h2&gt;
+&lt;p&gt;기존 객체를 수정하지 않고 일련의 로직을 프록시를 통해 추가할 수 있기 때문에 객체지향 5원칙 중 OCP, SRP를 지킬 수 있고, 또, 유연한 코드를 만들 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OCP(Open Close Principle)
+&lt;ul&gt;
+&lt;li&gt;확장에 대해서는 개방되어야하지만 변경에 대해서는 폐쇄되어야한다는 원칙 -&gt; 프록시를 사용한다면 기존 코드를 변경하지 않고 새로운 기능을 추가할 수 있음!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;SRP(Single Responsibility Principle)
+&lt;ul&gt;
+&lt;li&gt;하나의 클래스는 하나의 책임을 가져야한다는 원칙 -&gt; 프록시 객체 따로, 일반 객체 따로이기에 서로 각자의 일만 수행한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;레퍼런스&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://javascriptpatterns.vercel.app/patterns/design-patterns/proxy-pattern&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;https://javascriptpatterns.vercel.app/patterns/design-patterns/proxy-pattern&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev-coco.tistory.com/177&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;https://dev-coco.tistory.com/177&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[JS] this 바인딩]]></title><description><![CDATA[yeopto의 개발 성장 이야기]]></description><link>https://yeopto.github.io/JScontents/this_binding/</link><guid isPermaLink="false">https://yeopto.github.io/JScontents/this_binding/</guid><pubDate>Sun, 26 Feb 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;로또 미션을 하면서 메서드로 이벤트 핸들러 함수를 만들기도 하고, 만든 것을 다른 메서드 내에서 사용했다. 이벤트 핸들러 함수 내의 this가 이벤트 핸들러 함수를 어떻게 콜백으로 던져줬냐에 따라 this 바인딩이 달라졌다. 그 부분에 대해 알아보자.&lt;/p&gt;
 &lt;br&gt;
 &lt;p&gt;먼저 일반함수와 화살표 함수의 this 바인딩은 어떻게 되는지 알아보자.&lt;/p&gt;
 &lt;h2&gt;일반함수에서의 this&lt;/h2&gt;
