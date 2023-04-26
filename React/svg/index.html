@@ -11,6 +11,7 @@
 단점으로는 웹 그래픽에 적합하지, 픽셀이 부족하므로 고품질 디지털 사진을 표현하는데는 한계가 있다. 디테일이 풍부한 사진에는 jpeg 파일이 더 좋다. 그리고 최신 브라우저에서만 svg이미지를 지원하므로 옛 브라우저는 사용하기 어려울 수 있다!</p>
 <h1>React에서 svg파일을 사용해보자</h1>
 <p>먼저 svg 파일을 확인해보자!</p>
+<p><strong>참고 : 피그마에서 svg를 따왔는데 이 파일은 png이미지를 svg로 감싼 파일이라 확대시 이미지가 깨질 수 있다..!</strong></p>
 <div class="gatsby-highlight" data-language="xml"><pre class="language-xml"><code class="language-xml"><span class="token comment">&lt;!--hana.svg--></span>
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>svg</span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>37<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>37<span class="token punctuation">"</span></span> <span class="token attr-name">viewBox</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0 0 37 37<span class="token punctuation">"</span></span> <span class="token attr-name">fill</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>none<span class="token punctuation">"</span></span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2000/svg<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xlink</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/1999/xlink<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -51,7 +52,27 @@
   <span class="token literal-property property">국민카드</span><span class="token operator">:</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">KUKMIN</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span> <span class="token keyword">as</span> <span class="token keyword">const</span><span class="token punctuation">;</span></code></pre></div>
 <h1>추가 tip</h1>
-<p>위 svg파일에 보면 <code class="language-text">width</code>, <code class="language-text">height</code> 등 속성이 있는데, 속성 값을 <code class="language-text">'current'</code>로 바꿔준다면 바꿔준 속성은 사용하는 컴포넌트에서 <code class="language-text">props</code>로 custom할 수 있다고 한다!</p>
+<p><del>위 svg파일에 보면 <code class="language-text">width</code>, <code class="language-text">height</code> 등 속성이 있는데, 속성 값을 <code class="language-text">'current'</code>로 바꿔준다면 바꿔준 속성은 사용하는 컴포넌트에서 <code class="language-text">props</code>로 custom할 수 있다고 한다!</del>
+<br>
+<br>
+<strong>위의 내용은 잘못된 정보다.</strong>
+<br>
+<br>
+<code class="language-text">Create-React-App</code> 으로 프로젝트를 생성하면 <code class="language-text">react-app-env.d.ts</code> 파일이 생성된다. <code class="language-text">&lt;reference types="react-scripts"/></code>한 줄이 있는데, <code class="language-text">react-script</code>에 들어가보면 svg에 관련된 선언코드가 있다.</p>
+<div class="gatsby-highlight" data-language="ts"><pre class="language-ts"><code class="language-ts"><span class="token comment">// react-script/lib/react-app.d.ts</span>
+
+<span class="token keyword">declare</span> <span class="token keyword">module</span> <span class="token string">'*.svg'</span> <span class="token punctuation">{</span>
+  <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">export</span> <span class="token keyword">const</span> ReactComponent<span class="token operator">:</span> React<span class="token punctuation">.</span>FunctionComponent<span class="token operator">&lt;</span>React<span class="token punctuation">.</span>SVGProps<span class="token operator">&lt;</span>
+    SVGSVGElement
+  <span class="token operator">></span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span> title<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> src<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  <span class="token keyword">export</span> <span class="token keyword">default</span> src<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p>위 선언문을 보면 svg 파일을 ReactComponent로 선언하여 사용할 시 svg 컴포넌트의 타입은 <code class="language-text">React.FunctionComponent&lt;React.SVGProps&lt;SVGSVGElement>></code> 인 것을 확인할 수 있다. 이 타입을 타고 들어가다보면 <code class="language-text">SVGAttributes&lt;T></code> 타입이 있는데 여기에 <code class="language-text">width</code>, <code class="language-text">height</code> 등 svg 속성들의 타입이 다 정의 되어있다. 즉, 속성 값을 <code class="language-text">'current'</code> 로 바꿔주지 않아도 예를들어 <code class="language-text">&lt;BC width={20}, height={30}/></code> 이렇게 커스텀을 할 수 있고 동작도 잘한다!</p>
 <h1>여기서 주의!!</h1>
 <p><code class="language-text">Create-React-App</code>을 사용하여 생성한 프로젝트가 아니라면 webpack에서 file-loader에 대한 설정을 해줘야 사용이 가능하다고 한다!</p>
 <h1>reference</h1>
