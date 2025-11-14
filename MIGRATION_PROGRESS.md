@@ -108,11 +108,21 @@
 
 ## 다음 단계
 
-### 6. Category Feature 구현 (다음 작업)
+### 6. Category Feature 구현 ✅
 
-- [ ] `features/category/components/CategoryFilter.tsx` - 카테고리 필터 컴포넌트
-- [ ] `features/category/hooks/useCategories.ts` - 카테고리 목록 추출 훅
-- [ ] `features/category/utils/categoryUtils.ts` - 카테고리 관련 유틸리티
+- [x] `features/category/utils/categoryUtils.ts` - getAllCategories 함수 (카테고리명: 포스트 개수 매핑)
+- [x] `features/category/hooks/useCategories.ts` - useCategories 훅 (카테고리 목록과 통계 반환)
+- [x] `features/category/components/CategoryFilter.tsx` - 카테고리 필터 컴포넌트 (Badge 기반, URL 쿼리 파라미터 연동)
+- [x] `features/category/index.ts` - 모든 컴포넌트, 훅, 유틸리티 export
+
+## 다음 단계
+
+### 7. 페이지 구현 (다음 작업)
+
+- [ ] `app/layout.tsx` - 루트 레이아웃 (메타데이터, 폰트, 다크모드 설정)
+- [ ] `app/page.tsx` - 홈 페이지 (포스트 리스트, 카테고리 필터)
+- [ ] `app/posts/[slug]/page.tsx` - 포스트 상세 페이지
+- [ ] `app/not-found.tsx` - 404 페이지
 
 ## 참고 사항
 
