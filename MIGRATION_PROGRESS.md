@@ -94,16 +94,25 @@
 
 ## 다음 단계
 
-### 5. Post Feature 구현 (다음 작업)
+### 5. Post Feature 구현 ✅
 
-- [ ] `features/post/components/PostCard.tsx` - 포스트 카드 컴포넌트
-- [ ] `features/post/components/PostList.tsx` - 포스트 리스트
-- [ ] `features/post/components/PostHeader.tsx` - 포스트 헤더 (제목, 날짜, 카테고리)
-- [ ] `features/post/components/PostContent.tsx` - 포스트 본문
-- [ ] `features/post/components/RelatedPosts.tsx` - 관련 포스트 추천
-- [ ] `features/post/hooks/usePostList.ts` - 포스트 리스트 로직 (Client Component용)
-- [ ] `features/post/hooks/usePost.ts` - 단일 포스트 로직 (Client Component용)
-- [ ] `features/post/utils/postUtils.ts` - 읽기 시간 계산, 날짜 포맷팅 등
+- [x] `features/post/utils/postUtils.ts` - 읽기 시간 계산, 날짜 포맷팅, 상대 시간 포맷팅
+- [x] `features/post/components/PostCard.tsx` - 포스트 카드 컴포넌트 (썸네일, 제목, 요약, 카테고리, 날짜, 읽기 시간)
+- [x] `features/post/components/PostList.tsx` - 포스트 리스트 (그리드 레이아웃, 반응형)
+- [x] `features/post/components/PostHeader.tsx` - 포스트 헤더 (제목, 날짜, 카테고리, 읽기 시간)
+- [x] `features/post/components/PostContent.tsx` - 포스트 본문 (썸네일 + 마크다운 콘텐츠)
+- [x] `features/post/components/RelatedPosts.tsx` - 관련 포스트 추천 컴포넌트
+- [x] `features/post/hooks/usePostList.ts` - 포스트 리스트 로직 (카테고리 필터링, 검색)
+- [x] `features/post/hooks/usePost.ts` - 단일 포스트 로직 (Client Component용)
+- [x] `features/post/index.ts` - 모든 컴포넌트, 훅, 유틸리티 export
+
+## 다음 단계
+
+### 6. Category Feature 구현 (다음 작업)
+
+- [ ] `features/category/components/CategoryFilter.tsx` - 카테고리 필터 컴포넌트
+- [ ] `features/category/hooks/useCategories.ts` - 카테고리 목록 추출 훅
+- [ ] `features/category/utils/categoryUtils.ts` - 카테고리 관련 유틸리티
 
 ## 참고 사항
 
