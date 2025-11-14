@@ -35,7 +35,7 @@ const MarkdownRenderer = styled.div`
   * + h1,
   * + h2,
   * + h3 {
-    margin-top: 40px;
+    margin: 15px 0;
   }
 
   hr + h1,
@@ -58,7 +58,7 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Quotation Element Style
   blockquote {
-    margin: 30px 0;
+    margin: 20px 0;
     padding: 5px 15px;
     border-left: 2px solid #000000;
     font-weight: 800;
