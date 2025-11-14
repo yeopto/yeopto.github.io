@@ -1,0 +1,535 @@
+---
+description: 코드 품질 기준 - 가독성, 예측 가능성, 응집도, 결합도를 모두 고려한 Next.js + Tailwind CSS 프로젝트 가이드라인
+alwaysApply: true
+---
+
+# 코드 품질 기준
+
+이 프로젝트는 frontend-fundamentals.com의 코드 품질 기준을 따릅니다.
+좋은 코드는 **변경하기 쉬운** 코드이며, 다음 4가지 기준으로 판단합니다:
+
+1. 가독성 (Readability)
+2. 예측 가능성 (Predictability)
+3. 응집도 (Cohesion)
+4. 결합도 (Coupling)
+
+## 프로젝트 컨텍스트
+
+- **프레임워크**: Next.js (App Router)
+- **언어**: TypeScript (strict mode)
+- **스타일링**: Tailwind CSS
+- **React 버전**: 18+ (최신 패턴 사용)
+- **디렉토리 구조**: Feature-based 패턴 (재사용 가능한 순수 UI 컴포넌트는 `components/ui/`에 별도 관리)
+
+---
+
+## 1. 가독성 (Readability)
+
+코드가 읽기 쉬운 정도. 읽는 사람이 한 번에 고려하는 맥락이 적고, 위에서 아래로 자연스럽게 이어져야 합니다.
+
+### 1.1 맥락 줄이기
+
+#### 같이 실행되지 않는 코드 분리하기
+
+- 서로 다른 관심사를 가진 코드는 별도의 함수/컴포넌트로 분리
+- 데이터 fetching, UI 렌더링, 이벤트 핸들링은 분리
+
+```typescript
+// ❌ 나쁜 예: 여러 관심사가 섞임
+useEffect(() => {
+  fetchUserData();
+  updateLocalStorage();
+  trackAnalytics();
+}, []);
+
+// ✅ 좋은 예: 관심사별로 분리
+useEffect(() => {
+  fetchUserData();
+}, []);
+useEffect(() => {
+  updateLocalStorage();
+}, []);
+useEffect(() => {
+  trackAnalytics();
+}, []);
+```
+
+#### 구현 상세 추상화하기
+
+- 복잡한 로직은 의미 있는 이름의 함수로 추상화
+- 비즈니스 로직과 구현 세부사항 분리
+- 유틸리티 함수는 `utils/` 디렉토리에 분리
+
+```typescript
+// ❌ 나쁜 예: 구현 상세가 노출됨
+const isAdult = (birthDate: string) => {
+  const today = new Date();
+  const birth = new Date(birthDate);
+  const age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  return age > 18 || (age === 18 && monthDiff >= 0);
+};
+
+// ✅ 좋은 예: 구현 상세가 추상화됨
+const calculateAge = (birthDate: string): number => {
+  /* ... */
+};
+const isAdult = (birthDate: string): boolean => calculateAge(birthDate) >= 18;
+```
+
+#### 로직 종류에 따라 합쳐진 함수 쪼개기
+
+- 하나의 함수가 여러 종류의 로직을 처리하지 않도록 분리
+- 데이터 변환, 검증, 렌더링 로직은 각각 분리
+
+```typescript
+// ❌ 나쁜 예: 여러 로직이 섞임
+function processUserData(user: User) {
+  if (!user.email.includes('@')) return null;
+  return `<div>${user.name.toUpperCase()}</div>`;
+}
+
+// ✅ 좋은 예: 로직별로 분리
+function validateUserEmail(email: string): boolean {
+  return email.includes('@');
+}
+function formatUserName(name: string): string {
+  return name.toUpperCase();
+}
+function renderUser(user: User): string {
+  if (!validateUserEmail(user.email)) return '';
+  return `<div>${formatUserName(user.name)}</div>`;
+}
+```
+
+### 1.2 이름 붙이기
+
+#### 복잡한 조건에 이름 붙이기
+
+- 복잡한 조건문은 의미 있는 변수명으로 추출
+- boolean 변수는 `is`, `has`, `should` 등의 접두사 사용
+
+```typescript
+// ❌ 나쁜 예
+if (user.age >= 18 && user.hasLicense && !user.isSuspended) {
+}
+
+// ✅ 좋은 예
+const isEligibleToDrive =
+  user.age >= 18 && user.hasLicense && !user.isSuspended;
+if (isEligibleToDrive) {
+}
+```
+
+#### 매직 넘버에 이름 붙이기
+
+- 하드코딩된 숫자, 문자열은 상수로 추출
+- 상수는 파일 상단 또는 별도 `constants/` 디렉토리에 정의
+
+```typescript
+// ❌ 나쁜 예
+setTimeout(() => {}, 3000);
+
+// ✅ 좋은 예
+const DEBOUNCE_DELAY_MS = 3000;
+setTimeout(() => {}, DEBOUNCE_DELAY_MS);
+```
+
+### 1.3 위에서 아래로 읽히게 하기
+
+#### 시점 이동 줄이기
+
+- 코드는 위에서 아래로 순차적으로 읽히도록 작성
+- 콜백, Promise 체이닝보다는 async/await 사용
+- 중첩된 조건문보다는 early return 사용
+
+```typescript
+// ❌ 나쁜 예: 시점이 여러 곳으로 이동
+function handleSubmit() {
+  if (isValid) {
+    api.post('/users', data).then(response => {
+      if (response.ok) router.push('/success');
+    });
+  }
+}
+
+// ✅ 좋은 예: 위에서 아래로 읽힘
+async function handleSubmit() {
+  if (!isValid) return;
+  const response = await api.post('/users', data);
+  if (!response.ok) return;
+  router.push('/success');
+}
+```
+
+#### 삼항 연산자 단순하게 하기
+
+- 중첩된 삼항 연산자 지양
+- 복잡한 조건은 if-else 또는 함수로 분리
+
+```typescript
+// ❌ 나쁜 예: 중첩된 삼항 연산자
+const status = isActive
+  ? isPremium
+    ? 'premium-active'
+    : 'active'
+  : 'inactive';
+
+// ✅ 좋은 예: 함수로 분리
+const getStatus = (isActive: boolean, isPremium: boolean): string => {
+  if (!isActive) return 'inactive';
+  return isPremium ? 'premium-active' : 'active';
+};
+```
+
+---
+
+## 2. 예측 가능성 (Predictability)
+
+함수나 컴포넌트의 동작을 이름과 파라미터, 반환 값만 보고도 예측할 수 있어야 합니다.
+
+### 2.1 이름 겹치지 않게 관리하기
+
+- 변수명, 함수명, 컴포넌트명은 명확하고 중복되지 않게 작성
+- 전역 변수 사용 지양, 필요한 경우 명확한 네임스페이스 사용
+- 컴포넌트명은 PascalCase, 함수/변수는 camelCase
+
+```typescript
+// ❌ 나쁜 예: 이름이 모호함
+function getData() {}
+function getDataFromAPI() {}
+
+// ✅ 좋은 예: 이름이 명확함
+function getUserProfile() {}
+function getUserProfileFromAPI() {}
+```
+
+### 2.2 같은 종류의 함수는 반환 타입 통일하기
+
+- 유사한 기능의 함수들은 일관된 반환 타입 사용
+- 성공/실패를 나타내는 경우 `Result<T, E>` 패턴 또는 명확한 타입 사용
+
+```typescript
+// ❌ 나쁜 예: 반환 타입이 불일치
+function fetchUser(): User | null {}
+function fetchPost(): Post | undefined {}
+
+// ✅ 좋은 예: 반환 타입이 일관됨
+type FetchResult<T> = { data: T; error: null } | { data: null; error: string };
+function fetchUser(): FetchResult<User> {}
+function fetchPost(): FetchResult<Post> {}
+```
+
+### 2.3 숨은 로직 드러내기
+
+- 암묵적인 동작은 명시적으로 표현
+- 사이드 이펙트가 있는 함수는 이름에 명시 (`handle`, `update`, `set` 등)
+- 타입을 명시하여 의도를 드러내기
+
+```typescript
+// ❌ 나쁜 예: 숨은 로직이 있음
+function process(data: unknown) {}
+
+// ✅ 좋은 예: 의도가 명확함
+function updateUserData(user: User, updates: Partial<User>): User {
+  return { ...user, ...updates };
+}
+```
+
+---
+
+## 3. 응집도 (Cohesion)
+
+함께 수정되어야 할 코드가 항상 같이 수정되도록 구조적으로 뒷받침되어야 합니다.
+
+### 3.1 함께 수정되는 파일을 같은 디렉토리에 두기
+
+- 관련된 컴포넌트, 훅, 유틸리티는 같은 디렉토리에 배치
+- Feature-based 구조를 사용하여 feature별로 디렉토리 구성
+
+```
+src/
+  features/
+    post/
+      components/  # PostList.tsx, PostItem.tsx
+      hooks/       # usePostList.ts
+      types/       # post.types.ts
+      utils/       # postUtils.ts
+```
+
+### 3.2 매직 넘버 없애기
+
+- 하드코딩된 값은 상수로 추출
+- 관련된 상수들은 함께 관리 (enum, const object 등)
+
+```typescript
+// ❌ 나쁜 예
+if (status === 1) {
+}
+if (status === 2) {
+}
+
+// ✅ 좋은 예
+enum PostStatus {
+  DRAFT = 1,
+  PUBLISHED = 2,
+}
+if (status === PostStatus.DRAFT) {
+}
+```
+
+### 3.3 폼의 응집도 생각하기
+
+- 폼 관련 상태, 검증 로직, 제출 핸들러는 함께 관리
+- React Hook Form 같은 라이브러리 사용 시, 관련 로직을 한 곳에 모음
+
+```typescript
+// ✅ 좋은 예: 폼 관련 로직이 응집되어 있음
+function usePostForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PostFormData>();
+  const validateTitle = (value: string) => {
+    if (!value.trim()) return '제목을 입력해주세요';
+    if (value.length > 100) return '제목은 100자 이하여야 합니다';
+    return true;
+  };
+  const onSubmit = async (data: PostFormData) => {
+    await createPost(data);
+  };
+  return {
+    register,
+    handleSubmit: handleSubmit(onSubmit),
+    errors,
+    validateTitle,
+  };
+}
+```
+
+---
+
+## 4. 결합도 (Coupling)
+
+코드를 수정했을 때의 영향 범위가 적어야 합니다. 변경에 따른 범위를 예측할 수 있어야 합니다.
+
+### 4.1 책임을 하나씩 관리하기
+
+- 컴포넌트는 하나의 책임만 가져야 함
+- 데이터 fetching과 UI 렌더링 분리
+- 비즈니스 로직과 UI 로직 분리
+
+```typescript
+// ❌ 나쁜 예: 여러 책임이 섞임
+function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch(`/api/users/${userId}`)
+      .then(r => r.json())
+      .then(setUser);
+  }, [userId]);
+  if (!user) return <div>Loading...</div>;
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+
+// ✅ 좋은 예: 책임이 분리됨
+function useUser(userId: string) {
+  const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    fetchUser(userId).then(setUser);
+  }, [userId]);
+  return user;
+}
+function UserProfile({ userId }: { userId: string }) {
+  const user = useUser(userId);
+  if (!user) return <Loading />;
+  return <UserProfileView user={user} />;
+}
+```
+
+### 4.2 중복 코드 허용하기
+
+- 응집도와의 균형을 고려하여 중복 코드 허용
+- 위험성이 높지 않은 경우, 가독성을 우선하여 중복 허용
+- 위험성이 높은 경우(함께 수정되어야 함)에만 공통화
+
+```typescript
+// ✅ 좋은 예: 위험성이 낮아 중복 허용
+function PostCard({ post }: { post: Post }) {
+  return (
+    <div className="p-4 border rounded">
+      <h2>{post.title}</h2>
+      <p>{post.summary}</p>
+    </div>
+  );
+}
+function CategoryCard({ category }: { category: Category }) {
+  return (
+    <div className="p-4 border rounded">
+      <h2>{category.name}</h2>
+      <p>{category.description}</p>
+    </div>
+  );
+}
+```
+
+### 4.3 Props Drilling 지우기
+
+- 깊은 props 전달은 Context API 또는 상태 관리 라이브러리 사용
+- Next.js의 경우 Server Components 활용하여 props drilling 최소화
+
+```typescript
+// ❌ 나쁜 예: Props Drilling
+function App({ user }: { user: User }) {
+  return <Layout user={user} />;
+}
+function Layout({ user }: { user: User }) {
+  return <Header user={user} />;
+}
+
+// ✅ 좋은 예: Context 사용
+const UserContext = createContext<User | null>(null);
+function App({ user }: { user: User }) {
+  return (
+    <UserContext.Provider value={user}>
+      <Layout />
+    </UserContext.Provider>
+  );
+}
+function UserMenu() {
+  const user = useContext(UserContext);
+}
+```
+
+---
+
+## Next.js + Tailwind CSS 특화 규칙
+
+### App Router 패턴
+
+- Server Components를 기본으로 사용
+- Client Components는 `'use client'` 지시어로 명시
+- 데이터 fetching은 Server Components에서 수행
+
+```typescript
+// ✅ Server Component (기본)
+export default async function PostPage({ params }: { params: { id: string } }) {
+  const post = await fetchPost(params.id);
+  return <PostContent post={post} />;
+}
+
+// ✅ Client Component (필요시만)
+('use client');
+export function LikeButton({ postId }: { postId: string }) {
+  const [liked, setLiked] = useState(false);
+}
+```
+
+### Tailwind CSS 클래스명 가독성
+
+- 긴 클래스명은 여러 줄로 분리
+- 관련된 스타일은 그룹화하여 주석 추가
+- 반복되는 스타일은 컴포넌트로 추출 고려
+
+```typescript
+// ✅ 좋은 예: 클래스명이 읽기 쉬움
+<div className="flex flex-col gap-4 p-6 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow">
+  {/* ... */}
+</div>
+```
+
+### 컴포넌트 구조
+
+- **Feature-based 구조**를 기본으로 사용
+- 각 feature는 도메인별로 독립적인 디렉토리를 가지며, 관련된 컴포넌트, 훅, 타입, 유틸리티를 함께 관리
+- 재사용 가능한 순수 UI 컴포넌트는 `components/ui/`에 별도 관리
+- 공통 레이아웃/템플릿은 `components/common/`에 배치
+
+```
+src/
+  app/                    # Next.js App Router
+  components/
+    ui/                   # 재사용 가능한 순수 UI 컴포넌트 (Button, Input, Card 등)
+    common/               # 공통 레이아웃/템플릿 (Layout, Footer 등)
+  features/
+    post/                 # Post 도메인 feature
+      components/         # Post 전용 컴포넌트
+      hooks/              # Post 관련 훅
+      types/              # Post 타입 정의
+      utils/              # Post 유틸리티
+    category/             # Category 도메인 feature
+      components/
+      hooks/
+      types/
+  lib/                    # 외부 라이브러리 설정
+  types/                  # 전역 타입
+```
+
+**Feature-based 구조의 장점:**
+
+- **응집도 향상**: 관련된 코드가 한 곳에 모여 함께 수정됨
+- **결합도 감소**: feature 간 독립성 유지
+- **확장성**: 새 feature 추가가 용이함
+- **유지보수성**: 도메인별로 코드를 쉽게 찾고 수정할 수 있음
+
+---
+
+## 코드 품질 기준의 균형
+
+이 4가지 기준은 서로 상충할 수 있습니다:
+
+- **가독성 vs 응집도**: 응집도를 높이기 위해 추상화하면 가독성이 떨어질 수 있음
+- **결합도 vs 응집도**: 중복 코드를 허용하면 결합도는 낮아지지만 응집도가 떨어질 수 있음
+
+**원칙**: 현재 상황을 바탕으로 깊이 있게 고민하고, 장기적으로 코드가 수정하기 쉽도록 어떤 가치를 우선할지 판단합니다.
+
+- 위험성이 높은 경우(함께 수정되지 않으면 오류 발생): **응집도 우선**
+- 위험성이 낮은 경우: **가독성 우선**
+
+---
+
+## 추가 규칙
+
+### TypeScript
+
+- `any` 타입 사용 지양, `unknown` 사용 고려
+- 타입 추론이 명확한 경우에도 명시적 타입 선언 고려 (가독성 향상)
+- 인터페이스보다는 타입 별칭(type alias) 우선 사용
+
+### React
+
+- 함수 컴포넌트만 사용 (클래스 컴포넌트 지양)
+- Custom Hook은 `use` 접두사 사용
+- 컴포넌트명은 파일명과 일치
+
+### 파일 명명 규칙
+
+- 컴포넌트: PascalCase (예: `PostList.tsx`)
+- 훅: camelCase with `use` prefix (예: `usePostList.ts`)
+- 유틸리티: camelCase (예: `formatDate.ts`)
+- 타입: camelCase with `.types.ts` suffix (예: `post.types.ts`)
+
+### Import 순서
+
+1. React 및 Next.js 관련
+2. 외부 라이브러리
+3. 내부 컴포넌트
+4. 훅 및 유틸리티
+5. 타입
+6. 상대 경로 import
+
+```typescript
+// ✅ 좋은 예: import 순서
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { format } from 'date-fns';
+import { Button } from '@/components/ui/Button';
+import { usePostList } from '@/features/post/hooks/usePostList';
+import type { Post } from '@/features/post/types/post.types';
+```
