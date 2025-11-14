@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import typographyPlugin from '@tailwindcss/typography';
 import {
 	typography,
 	spacing,
@@ -67,7 +68,7 @@ const config: Config = {
 			) as Record<string, string>,
 		},
 	},
-	plugins: [],
+	plugins: [typographyPlugin],
 };
 
 export default config;

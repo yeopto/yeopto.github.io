@@ -82,12 +82,28 @@
 
 ## 다음 단계
 
-### 4. 마크다운 처리 시스템 구축 (다음 작업)
+### 4. 마크다운 처리 시스템 구축 ✅
 
-- [ ] `lib/markdown/parseMarkdown.ts` - 마크다운 파싱
-- [ ] `lib/markdown/getAllPosts.ts` - 모든 포스트 메타데이터 추출
-- [ ] `lib/markdown/getPostBySlug.ts` - 특정 포스트 내용 추출
-- [ ] `components/markdown/MarkdownContent.tsx` - 마크다운 렌더링 컴포넌트
+- [x] `types/post.types.ts` - Post 타입 정의 (Gatsby 타입에서 Next.js 타입으로 변환)
+- [x] `lib/markdown/getAllPosts.ts` - 모든 포스트 메타데이터 추출 (재귀적으로 마크다운 파일 찾기)
+- [x] `lib/markdown/getPostBySlug.ts` - 특정 포스트 내용 추출 및 HTML 변환
+- [x] `lib/markdown/parseMarkdown.ts` - 마크다운 파싱 유틸리티
+- [x] `components/markdown/MarkdownContent.tsx` - 마크다운 렌더링 컴포넌트 (prose 스타일)
+- [x] `package.json` - @tailwindcss/typography 플러그인 추가
+- [x] `tailwind.config.ts` - typography 플러그인 설정
+
+## 다음 단계
+
+### 5. Post Feature 구현 (다음 작업)
+
+- [ ] `features/post/components/PostCard.tsx` - 포스트 카드 컴포넌트
+- [ ] `features/post/components/PostList.tsx` - 포스트 리스트
+- [ ] `features/post/components/PostHeader.tsx` - 포스트 헤더 (제목, 날짜, 카테고리)
+- [ ] `features/post/components/PostContent.tsx` - 포스트 본문
+- [ ] `features/post/components/RelatedPosts.tsx` - 관련 포스트 추천
+- [ ] `features/post/hooks/usePostList.ts` - 포스트 리스트 로직 (Client Component용)
+- [ ] `features/post/hooks/usePost.ts` - 단일 포스트 로직 (Client Component용)
+- [ ] `features/post/utils/postUtils.ts` - 읽기 시간 계산, 날짜 포맷팅 등
 
 ## 참고 사항
 
