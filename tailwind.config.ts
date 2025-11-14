@@ -1,4 +1,12 @@
 import type { Config } from 'tailwindcss';
+import {
+	typography,
+	spacing,
+	borderRadius,
+	shadows,
+	transitions,
+	zIndex,
+} from './lib/design-system/tokens';
 
 const config: Config = {
 	content: [
@@ -42,30 +50,21 @@ const config: Config = {
 				error: 'var(--color-error)',
 				info: 'var(--color-info)',
 			},
-			fontFamily: {
-				sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
-				serif: ['var(--font-serif)', 'serif'],
-			},
-			boxShadow: {
-				sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-				DEFAULT: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-				md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-				lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-				xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-				'2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
-				inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
-			},
-			transitionDuration: {
-				fast: '150ms',
-				base: '200ms',
-				slow: '300ms',
-				slower: '500ms',
-			},
+			fontFamily: typography.fontFamily as unknown as Record<string, string[]>,
+			fontSize: typography.fontSize as unknown as Record<string, [string, { lineHeight: string }]>,
+			fontWeight: typography.fontWeight as unknown as Record<string, string>,
+			spacing: spacing as unknown as Record<string, string>,
+			borderRadius: borderRadius as unknown as Record<string, string>,
+			boxShadow: shadows as unknown as Record<string, string>,
+			transitionDuration: transitions.duration as unknown as Record<string, string>,
 			transitionTimingFunction: {
-				'ease-in': 'cubic-bezier(0.4, 0, 1, 1)',
-				'ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
-				'ease-in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'ease-in': transitions.easing.easeIn,
+				'ease-out': transitions.easing.easeOut,
+				'ease-in-out': transitions.easing.easeInOut,
 			},
+			zIndex: Object.fromEntries(
+				Object.entries(zIndex).map(([key, value]) => [key, String(value)])
+			) as Record<string, string>,
 		},
 	},
 	plugins: [],

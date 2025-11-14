@@ -66,16 +66,28 @@
 
 ## 다음 단계
 
-### 3. 기본 UI 컴포넌트 개발 (다음 작업)
+### 3. 기본 UI 컴포넌트 개발 ✅
 
-- [ ] `components/ui/Button.tsx` - 버튼 컴포넌트
-- [ ] `components/ui/Card.tsx` - 카드 컴포넌트
-- [ ] `components/ui/Typography.tsx` - 타이포그래피 컴포넌트
-- [ ] `components/ui/Badge.tsx` - 배지 컴포넌트
-- [ ] `components/ui/Input.tsx` - 입력 필드 컴포넌트
-- [ ] `components/ui/Avatar.tsx` - 아바타 컴포넌트
-- [ ] `components/ui/Divider.tsx` - 구분선 컴포넌트
-- [ ] `components/ui/Container.tsx` - 컨테이너 컴포넌트
+- [x] `lib/utils/cn.ts` - 클래스명 병합 유틸리티
+- [x] `components/ui/Button.tsx` - 버튼 컴포넌트 (variants: primary, secondary, outline, ghost / sizes: sm, md, lg)
+- [x] `components/ui/Card.tsx` - 카드 컴포넌트 (CardHeader, CardTitle, CardDescription, CardContent, CardFooter)
+- [x] `components/ui/Typography.tsx` - 타이포그래피 컴포넌트 (h1-h6, body, body2, caption, overline)
+- [x] `components/ui/Badge.tsx` - 배지 컴포넌트 (variants: default, primary, secondary, success, warning, error)
+- [x] `components/ui/Input.tsx` - 입력 필드 컴포넌트
+- [x] `components/ui/Avatar.tsx` - 아바타 컴포넌트 (sizes: sm, md, lg, xl)
+- [x] `components/ui/Divider.tsx` - 구분선 컴포넌트 (horizontal, vertical)
+- [x] `components/ui/Container.tsx` - 컨테이너 컴포넌트 (sizes: sm, md, lg, xl, full)
+- [x] `components/ui/index.ts` - 컴포넌트 export 파일
+- [x] `package.json` - clsx, tailwind-merge 패키지 추가
+
+## 다음 단계
+
+### 4. 마크다운 처리 시스템 구축 (다음 작업)
+
+- [ ] `lib/markdown/parseMarkdown.ts` - 마크다운 파싱
+- [ ] `lib/markdown/getAllPosts.ts` - 모든 포스트 메타데이터 추출
+- [ ] `lib/markdown/getPostBySlug.ts` - 특정 포스트 내용 추출
+- [ ] `components/markdown/MarkdownContent.tsx` - 마크다운 렌더링 컴포넌트
 
 ## 참고 사항
 
