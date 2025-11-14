@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+
+:root {
+	/* 색상 팔레트 - 라이트 모드 */
+	--color-background: #ffffff;
+	--color-foreground: #0a0a0a;
+	--color-primary: #4263eb;
+	--color-primary-hover: #364fc7;
+	--color-secondary: #868e96;
+	--color-muted: #f1f3f5;
+	--color-muted-foreground: #495057;
+	--color-accent: #4263eb;
+	--color-accent-hover: #364fc7;
+	--color-border: #dee2e6;
+	--color-input: #e9ecef;
+	--color-ring: #4263eb;
+	--color-card: #ffffff;
+	--color-card-foreground: #0a0a0a;
+	--color-popover: #ffffff;
+	--color-popover-foreground: #0a0a0a;
+
+	/* 그라데이션 */
+	--color-gradient-from: #667eea;
+	--color-gradient-to: #764ba2;
+
+	/* 상태 색상 */
+	--color-success: #51cf66;
+	--color-warning: #ffd43b;
+	--color-error: #ff6b6b;
+	--color-info: #4263eb;
+
+	/* 폰트 */
+	--font-sans: system-ui, -apple-system, sans-serif;
+	--font-serif: 'Nanum Myeongjo', serif;
+}
+
+.dark {
+	/* 색상 팔레트 - 다크 모드 */
+	--color-background: #0a0a0a;
+	--color-foreground: #fafafa;
+	--color-primary: #5c7cfa;
+	--color-primary-hover: #4263eb;
+	--color-secondary: #adb5bd;
+	--color-muted: #2d2d2d;
+	--color-muted-foreground: #ced4da;
+	--color-accent: #5c7cfa;
+	--color-accent-hover: #4263eb;
+	--color-border: #343a40;
+	--color-input: #495057;
+	--color-ring: #5c7cfa;
+	--color-card: #1a1a1a;
+	--color-card-foreground: #fafafa;
+	--color-popover: #1a1a1a;
+	--color-popover-foreground: #fafafa;
+
+	/* 그라데이션 (다크 모드에서도 동일) */
+	--color-gradient-from: #667eea;
+	--color-gradient-to: #764ba2;
+
+	/* 상태 색상 */
+	--color-success: #51cf66;
+	--color-warning: #ffd43b;
+	--color-error: #ff6b6b;
+	--color-info: #5c7cfa;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
+
+	/* 그라데이션 유틸리티 */
+	.bg-gradient-primary {
+		background: linear-gradient(135deg, var(--color-gradient-from), var(--color-gradient-to));
+	}
+
+	.text-gradient-primary {
+		background: linear-gradient(135deg, var(--color-gradient-from), var(--color-gradient-to));
+		-webkit-background-clip: text;
+		background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+/* Prism.js 코드 블록 스타일 */
+pre[class*='language-'] {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+	background-color: var(--color-muted);
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+	tab-size: 2;
+	font-family: ui-monospace, SFMono-Regular, monospace;
+}
+
+.dark pre[class*='language-'] {
+	background-color: var(--color-muted);
+}
+
+/* 스크롤바 커스터마이징 */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-muted);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--color-secondary);
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-primary);
+}
+
+/* 부드러운 애니메이션 */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideUp {
+	from {
+		transform: translateY(10px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+	animation: slideUp 0.3s ease-in-out;
+}
