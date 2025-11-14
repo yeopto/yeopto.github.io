@@ -6,6 +6,7 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import nextPlugin from '@next/eslint-plugin-next';
+import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,6 +36,7 @@ const eslintConfig = [
 			},
 		},
 		plugins: {
+			'@typescript-eslint': tseslint,
 			react: reactPlugin,
 			'react-hooks': reactHooksPlugin,
 			'@next/next': nextPlugin,
