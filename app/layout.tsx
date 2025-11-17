@@ -11,17 +11,19 @@ const inter = Inter({
 
 export const metadata: Metadata = {
 	title: "yeopto's Blog",
-	description: '코린이의 성장모험',
+	description: 'yeopto의 개발 성장 이야기',
 	authors: [{ name: 'yeopto' }],
 	openGraph: {
 		title: "yeopto's Blog",
-		description: '코린이의 성장모험',
+		description: 'yeopto의 개발 성장 이야기',
 		type: 'website',
+		url: "https://yeopto.github.io",
+		images: ["/profile-image.png"],
 	},
 	twitter: {
 		card: 'summary_large_image',
 		title: "yeopto's Blog",
-		description: '코린이의 성장모험',
+		description: 'yeopto의 개발 성장 이야기',
 	},
 	verification: {
 		google: 'ql22z_2Y_hxY79KKMHs_pLQVmom92VRl7YZ-86hVhZo',
