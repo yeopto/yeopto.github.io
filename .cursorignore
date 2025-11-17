@@ -1,0 +1,15 @@
+README.md
+firebase_options.dart
+firebase.json
+.gitignore
+.cursorignore
+.idea
+.vscode
+.DS_Store
+.env
+macos
+linux
+web
+windows
+assets
+.next

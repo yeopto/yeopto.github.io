@@ -7,31 +7,31 @@
 :root {
 	/* 색상 팔레트 - 라이트 모드 */
 	--color-background: #ffffff;
-	--color-foreground: #0a0a0a;
-	--color-primary: #4263eb;
-	--color-primary-hover: #364fc7;
-	--color-secondary: #868e96;
-	--color-muted: #f1f3f5;
-	--color-muted-foreground: #495057;
-	--color-accent: #4263eb;
-	--color-accent-hover: #364fc7;
-	--color-border: #dee2e6;
-	--color-input: #e9ecef;
-	--color-ring: #4263eb;
+	--color-foreground: #171717;
+	--color-primary: #2563eb;
+	--color-primary-hover: #1d4ed8;
+	--color-secondary: #6b7280;
+	--color-muted: #f9fafb;
+	--color-muted-foreground: #6b7280;
+	--color-accent: #2563eb;
+	--color-accent-hover: #1d4ed8;
+	--color-border: #e5e7eb;
+	--color-input: #f3f4f6;
+	--color-ring: #2563eb;
 	--color-card: #ffffff;
-	--color-card-foreground: #0a0a0a;
+	--color-card-foreground: #171717;
 	--color-popover: #ffffff;
-	--color-popover-foreground: #0a0a0a;
+	--color-popover-foreground: #171717;
 
 	/* 그라데이션 */
 	--color-gradient-from: #667eea;
 	--color-gradient-to: #764ba2;
 
 	/* 상태 색상 */
-	--color-success: #51cf66;
-	--color-warning: #ffd43b;
-	--color-error: #ff6b6b;
-	--color-info: #4263eb;
+	--color-success: #10b981;
+	--color-warning: #f59e0b;
+	--color-error: #ef4444;
+	--color-info: #2563eb;
 
 	/* 폰트 */
 	--font-sans: system-ui, -apple-system, sans-serif;
@@ -40,32 +40,32 @@
 
 .dark {
 	/* 색상 팔레트 - 다크 모드 */
-	--color-background: #0a0a0a;
-	--color-foreground: #fafafa;
-	--color-primary: #5c7cfa;
-	--color-primary-hover: #4263eb;
-	--color-secondary: #adb5bd;
-	--color-muted: #2d2d2d;
-	--color-muted-foreground: #ced4da;
-	--color-accent: #5c7cfa;
-	--color-accent-hover: #4263eb;
-	--color-border: #343a40;
-	--color-input: #495057;
-	--color-ring: #5c7cfa;
-	--color-card: #1a1a1a;
-	--color-card-foreground: #fafafa;
-	--color-popover: #1a1a1a;
-	--color-popover-foreground: #fafafa;
+	--color-background: #0f172a;
+	--color-foreground: #f1f5f9;
+	--color-primary: #3b82f6;
+	--color-primary-hover: #2563eb;
+	--color-secondary: #94a3b8;
+	--color-muted: #1e293b;
+	--color-muted-foreground: #cbd5e1;
+	--color-accent: #3b82f6;
+	--color-accent-hover: #2563eb;
+	--color-border: #334155;
+	--color-input: #1e293b;
+	--color-ring: #3b82f6;
+	--color-card: #1e293b;
+	--color-card-foreground: #f1f5f9;
+	--color-popover: #1e293b;
+	--color-popover-foreground: #f1f5f9;
 
 	/* 그라데이션 (다크 모드에서도 동일) */
 	--color-gradient-from: #667eea;
 	--color-gradient-to: #764ba2;
 
 	/* 상태 색상 */
-	--color-success: #51cf66;
-	--color-warning: #ffd43b;
-	--color-error: #ff6b6b;
-	--color-info: #5c7cfa;
+	--color-success: #10b981;
+	--color-warning: #f59e0b;
+	--color-error: #ef4444;
+	--color-info: #3b82f6;
 }
 
 * {

@@ -47,17 +47,12 @@ export async function getAllPosts(): Promise<Post[]> {
 			const { data, content } = matter(fileContents);
 			const slug = getSlugFromPath(filePath);
 
-			// thumbnail 경로 처리 (상대 경로를 절대 경로로 변환)
 			let thumbnail = data.thumbnail || '';
+
 			if (thumbnail && thumbnail.startsWith('../')) {
-				// 상대 경로를 contents 기준으로 변환
-				const fileDir = path.dirname(filePath);
-				const relativePath = path.relative(contentsDirectory, fileDir);
-				thumbnail = path
-					.join('/contents', relativePath, thumbnail.replace('../', ''))
-					.replace(/\\/g, '/');
+				thumbnail = thumbnail.replace(/^\.\.\//, '/');
 			} else if (thumbnail && !thumbnail.startsWith('/')) {
-				thumbnail = `/contents/${thumbnail}`;
+				thumbnail = `/${thumbnail}`;
 			}
 
 			return {

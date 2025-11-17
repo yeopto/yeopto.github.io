@@ -117,12 +117,16 @@
 
 ## 다음 단계
 
-### 7. 페이지 구현 (다음 작업)
+### 7. 페이지 구현 ✅
 
-- [ ] `app/layout.tsx` - 루트 레이아웃 (메타데이터, 폰트, 다크모드 설정)
-- [ ] `app/page.tsx` - 홈 페이지 (포스트 리스트, 카테고리 필터)
-- [ ] `app/posts/[slug]/page.tsx` - 포스트 상세 페이지
-- [ ] `app/not-found.tsx` - 404 페이지
+- [x] `app/layout.tsx` - 루트 레이아웃 (메타데이터, 폰트, Inter 폰트, SEO 설정)
+- [x] `components/common/Footer.tsx` - 푸터 컴포넌트
+- [x] `components/common/Introduction.tsx` - 소개 섹션 (프로필 이미지, 소셜 링크)
+- [x] `app/page.tsx` - 홈 페이지 (Server Component, 포스트 리스트, 카테고리 필터)
+- [x] `components/client/PostListClient.tsx` - 포스트 리스트 클라이언트 컴포넌트
+- [x] `components/client/CategoryFilterClient.tsx` - 카테고리 필터 클라이언트 컴포넌트
+- [x] `app/posts/[slug]/page.tsx` - 포스트 상세 페이지 (generateStaticParams, generateMetadata)
+- [x] `app/not-found.tsx` - 404 페이지
 
 ## 참고 사항
 

@@ -26,16 +26,18 @@ export function RelatedPosts({ posts, currentSlug, maxPosts = 3, className }: Re
 	}
 
 	return (
-		<section className={cn('mt-12 space-y-4', className)}>
-			<Typography variant="h2" className="text-2xl font-bold">
+		<section className={cn('mt-16 border-t border-border pt-12', className)}>
+			<Typography variant="h2" className="mb-6 text-2xl font-bold">
 				관련 포스트
 			</Typography>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 				{filteredPosts.map((post) => (
-					<Link key={post.slug} href={`/posts/${post.slug}`}>
-						<Card className="h-full transition-all duration-fast hover:shadow-md">
+					<Link key={post.slug} href={`/posts/${post.slug}`} className="group block">
+						<Card className="h-full transition-all duration-200 hover:border-primary/50 hover:shadow-md">
 							<CardHeader>
-								<CardTitle className="line-clamp-2 text-lg">{post.frontmatter.title}</CardTitle>
+								<CardTitle className="line-clamp-2 text-lg group-hover:text-primary transition-colors">
+									{post.frontmatter.title}
+								</CardTitle>
 							</CardHeader>
 							<CardContent>
 								<p className="text-sm text-muted-foreground">{formatDate(post.frontmatter.date)}</p>
