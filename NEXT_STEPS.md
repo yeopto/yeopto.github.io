@@ -52,11 +52,11 @@
 ## 다음 단계 작업 목록
 
 ### 1. Search Feature 구현 (우선순위: 높음)
-- [ ] `features/search/components/SearchBar.tsx` - 검색 입력 컴포넌트
-- [ ] `features/search/components/SearchResults.tsx` - 검색 결과 표시
-- [ ] `features/search/hooks/useSearch.ts` - Fuse.js 통합 검색 훅
-- [ ] `features/search/utils/searchUtils.ts` - 검색 관련 유틸리티
-- [ ] `features/search/index.ts` - export 파일
+- [x] `features/search/components/SearchBar.tsx` - 검색 입력 컴포넌트
+- [x] `features/search/components/SearchResults.tsx` - 검색 결과 표시
+- [x] `features/search/hooks/useSearch.ts` - Fuse.js 통합 검색 훅
+- [x] `features/search/utils/searchUtils.ts` - 검색 관련 유틸리티
+- [x] `features/search/index.ts` - export 파일
 
 **참고**: `fuse.js` 패키지는 이미 설치되어 있음
 
