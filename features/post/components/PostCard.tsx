@@ -36,11 +36,14 @@ export function PostCard({ post, className }: PostCardProps) {
 				)}
 				<CardHeader className="space-y-3">
 					<div className="flex flex-wrap gap-2">
-						{post.frontmatter.categories.map((category) => (
-							<Badge key={category} variant="secondary" size="sm">
-								{category}
-							</Badge>
-						))}
+						{post.frontmatter.categories
+							.filter((category) => category && category.trim() !== '') // 빈 문자열 제거
+							.filter((category, index, self) => self.indexOf(category) === index) // 중복 제거
+							.map((category, index) => (
+								<Badge key={`${category}-${index}`} variant="secondary" size="sm">
+									{category}
+								</Badge>
+							))}
 					</div>
 					<CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
 						{post.frontmatter.title}

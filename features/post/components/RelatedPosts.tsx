@@ -28,7 +28,7 @@ export function RelatedPosts({ posts, currentSlug, maxPosts = 3, className }: Re
 	return (
 		<section className={cn('mt-16 border-t border-border pt-12', className)}>
 			<Typography variant="h2" className="mb-6 text-2xl font-bold">
-				관련 포스트
+				다른 포스트
 			</Typography>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 				{filteredPosts.map((post) => (

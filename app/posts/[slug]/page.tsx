@@ -4,6 +4,7 @@ import { getPostBySlug } from '@/lib/markdown/getPostBySlug';
 import { PostHeader } from '@/features/post/components/PostHeader';
 import { PostContent } from '@/features/post/components/PostContent';
 import { RelatedPosts } from '@/features/post/components/RelatedPosts';
+import { TableOfContents } from '@/features/toc';
 import { Container } from '@/components/ui/Container';
 import type { Metadata } from 'next';
 
@@ -58,11 +59,16 @@ export default async function PostPage({ params }: { params: { slug: string } })
 	const allPosts = await getAllPosts();
 
 	return (
-		<Container className="my-12 max-w-4xl">
-			<article>
+		<Container className="my-12">
+			<div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
+				<article className="min-w-0">
 				<PostHeader post={post} />
 				<PostContent post={post} />
 			</article>
+				<aside className="hidden lg:block">
+					{post.html && <TableOfContents html={post.html} />}
+				</aside>
+			</div>
 			<RelatedPosts posts={allPosts} currentSlug={post.slug} />
 		</Container>
 	);

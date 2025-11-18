@@ -27,11 +27,15 @@ function getAllMarkdownFiles(dir: string, fileList: string[] = []): string[] {
 
 /**
  * 파일 경로에서 slug 생성
- * 예: contents/JScontents/func_programming.md → JScontents/func_programming
+ * 예: contents/JScontents/func_programming.md → JScontents-func_programming
+ * 예: contents/wooteco/week1.md → wooteco-week1
  */
 function getSlugFromPath(filePath: string): string {
 	const relativePath = path.relative(contentsDirectory, filePath);
-	const slug = relativePath.replace(/\.md$/, '').replace(/\\/g, '/');
+	const slug = relativePath
+		.replace(/\.md$/, '') // .md 확장자 제거
+		.replace(/\\/g, '/') // Windows 경로 구분자를 슬래시로 통일
+		.replace(/\//g, '-'); // 슬래시를 하이픈으로 변경
 	return slug;
 }
 
@@ -55,12 +59,19 @@ export async function getAllPosts(): Promise<Post[]> {
 				thumbnail = `/${thumbnail}`;
 			}
 
+			// 카테고리 배열 정리: 빈 문자열 제거 및 중복 제거
+			const categories = Array.isArray(data.categories)
+				? data.categories
+						.filter((cat: string) => cat && typeof cat === 'string' && cat.trim() !== '')
+						.filter((cat: string, index: number, self: string[]) => self.indexOf(cat) === index)
+				: [];
+
 			return {
 				slug,
 				frontmatter: {
 					title: data.title || '',
 					date: data.date || '',
-					categories: data.categories || [],
+					categories,
 					summary: data.summary || '',
 					thumbnail,
 				},
