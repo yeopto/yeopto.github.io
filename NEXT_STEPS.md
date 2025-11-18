@@ -61,10 +61,10 @@
 **참고**: `fuse.js` 패키지는 이미 설치되어 있음
 
 ### 2. TableOfContents Feature 구현
-- [ ] `features/toc/components/TableOfContents.tsx` - 목차 컴포넌트
-- [ ] `features/toc/hooks/useTableOfContents.ts` - 목차 추출 훅
-- [ ] `features/toc/utils/tocUtils.ts` - HTML에서 헤딩 추출 유틸리티
-- [ ] `features/toc/index.ts` - export 파일
+- [x] `features/toc/components/TableOfContents.tsx` - 목차 컴포넌트
+- [x] `features/toc/hooks/useTableOfContents.ts` - 목차 추출 훅
+- [x] `features/toc/utils/tocUtils.ts` - HTML에서 헤딩 추출 유틸리티
+- [x] `features/toc/index.ts` - export 파일
 
 ### 3. SEO 최적화
 - [ ] `app/sitemap.ts` - 동적 사이트맵 생성
@@ -78,18 +78,14 @@
 - [ ] `app/layout.tsx`에 ThemeProvider 추가
 - [ ] 모든 컴포넌트 다크모드 스타일 확인
 
-### 5. 추가 기능 구현
-- [ ] 소셜 공유 버튼 (Twitter, Facebook 등)
-- [ ] 읽기 시간 표시 (이미 `postUtils.ts`에 함수 있음)
-- [ ] 관련 포스트 추천 (이미 `RelatedPosts.tsx` 있음)
 
-### 6. 디자인 다듬기
+### 5. 디자인 다듬기
 - [ ] 애니메이션 추가
 - [ ] 그라데이션 효과
 - [ ] 호버 효과 개선
 - [ ] 모바일 반응형 최적화
 
-### 7. 빌드 및 배포 설정
+### 6. 빌드 및 배포 설정
 - [ ] `next.config.mjs` 최종 확인
 - [ ] GitHub Pages 배포 설정 (또는 Vercel)
 - [ ] 빌드 테스트
@@ -138,6 +134,5 @@ yeopto-blog/
 
 - SSG 사용 중 (`output: 'export'`)
 - Server Component와 Client Component 분리 완료
-- `src/` 폴더는 기존 Gatsby 코드 (참고용, exclude됨)
 - 모든 마크다운 파일은 `contents/` 디렉토리에 있음
 
