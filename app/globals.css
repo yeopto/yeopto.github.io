@@ -108,8 +108,8 @@ body {
 	}
 }
 
-/* Prism.js 코드 블록 스타일 */
-pre[class*='language-'] {
+/* 코드 블록 스타일 */
+pre {
 	margin: 1.5rem 0;
 	padding: 1rem;
 	border-radius: 0.5rem;
@@ -117,13 +117,13 @@ pre[class*='language-'] {
 	background-color: var(--color-muted);
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
+code,
+pre {
 	tab-size: 2;
 	font-family: ui-monospace, SFMono-Regular, monospace;
 }
 
-.dark pre[class*='language-'] {
+.dark pre {
 	background-color: var(--color-muted);
 }
 

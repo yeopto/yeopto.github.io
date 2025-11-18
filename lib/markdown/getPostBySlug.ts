@@ -1,6 +1,5 @@
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
-import remarkPrism from 'remark-prism';
 import type { PostPageItem } from '@/types/post.types';
 import { getAllPosts } from './getAllPosts';
 
@@ -10,7 +9,6 @@ import { getAllPosts } from './getAllPosts';
 export async function getPostBySlug(slug: string): Promise<PostPageItem | null> {
 	const posts = await getAllPosts();
 	const post = posts.find((p) => p.slug === slug);
-
 	if (!post) {
 		return null;
 	}
@@ -18,10 +16,13 @@ export async function getPostBySlug(slug: string): Promise<PostPageItem | null> 
 	// 마크다운을 HTML로 변환
 	const processedContent = await remark()
 		.use(remarkHtml, { sanitize: false })
-		.use(remarkPrism)
 		.process(post.content);
 
-	const html = processedContent.toString();
+	let html = processedContent.toString();
+
+	// 이미지 경로 수정: ../image/ -> /image/
+	// 마크다운에서 상대 경로로 작성된 이미지를 절대 경로로 변환
+	html = html.replace(/src="\.\.\/image\//g, 'src="/image/');
 
 	return {
 		...post,
