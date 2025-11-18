@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 import { getAllCategories } from '../utils/categoryUtils';
 
 export interface UseCategoriesResult {

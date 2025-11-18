@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PostCard } from './PostCard';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 import { cn } from '@/lib/utils/cn';
 
 export interface PostListProps {

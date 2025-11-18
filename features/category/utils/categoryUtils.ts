@@ -1,4 +1,4 @@
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 
 /**
  * 모든 포스트에서 카테고리 목록 추출

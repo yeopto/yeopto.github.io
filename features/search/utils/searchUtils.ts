@@ -1,5 +1,5 @@
 import Fuse, { type IFuseOptions, type FuseResultMatch } from 'fuse.js';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 
 /**
  * Fuse.js 검색 옵션 설정

@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback } from 'react';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 import { createSearchIndex, type SearchResult } from '../utils/searchUtils';
 
 export interface UseSearchOptions {

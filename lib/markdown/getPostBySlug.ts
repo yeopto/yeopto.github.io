@@ -1,6 +1,6 @@
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
-import type { PostPageItem } from '@/types/post.types';
+import type { PostPageItem } from '@/features/post/post.types';
 import { getAllPosts } from './getAllPosts';
 
 /**

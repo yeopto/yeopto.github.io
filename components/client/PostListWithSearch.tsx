@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { SearchBar, SearchResults, useSearch } from '@/features/search';
 import { PostList } from '@/features/post/components/PostList';
-import type { PostListItem } from '@/types/post.types';
+import { PostListItem } from '@/features/post/post.types';
 
 export interface PostListWithSearchProps {
 	posts: PostListItem[];

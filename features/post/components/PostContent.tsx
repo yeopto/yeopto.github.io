@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { MarkdownContent } from '@/components/markdown/MarkdownContent';
-import type { PostPageItem } from '@/types/post.types';
+import type { PostPageItem } from '@/features/post/post.types';
 import { cn } from '@/lib/utils/cn';
 
 export interface PostContentProps {

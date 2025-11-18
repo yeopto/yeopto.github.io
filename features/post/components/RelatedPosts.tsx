@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Typography } from '@/components/ui/Typography';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { formatDate } from '../utils/postUtils';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 import { cn } from '@/lib/utils/cn';
 
 export interface RelatedPostsProps {

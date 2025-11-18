@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 
 export interface UsePostListOptions {
 	initialPosts: PostListItem[];

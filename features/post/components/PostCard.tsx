@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { formatDate, calculateReadingTime } from '../utils/postUtils';
-import type { PostListItem } from '@/types/post.types';
+import type { PostListItem } from '@/features/post/post.types';
 import { cn } from '@/lib/utils/cn';
 
 export interface PostCardProps {
