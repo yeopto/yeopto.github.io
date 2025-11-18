@@ -7,7 +7,6 @@ export { RelatedPosts, type RelatedPostsProps } from './components/RelatedPosts'
 
 // Hooks
 export { usePostList, type UsePostListOptions } from './hooks/usePostList';
-export { usePost, type UsePostOptions, type UsePostResult } from './hooks/usePost';
 
 // Utils
 export { calculateReadingTime, formatDate, formatRelativeTime } from './utils/postUtils';
