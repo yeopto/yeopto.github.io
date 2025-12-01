@@ -1,0 +1,93 @@
+'use client';
+
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { cn } from '@/lib/utils/cn';
+
+/**
+ * 다크모드 토글 버튼 컴포넌트
+ * 라이트/다크 모드를 전환할 수 있는 버튼
+ */
+export function ThemeToggle({ className }: { className?: string }) {
+	const { theme, setTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+
+	// 마운트 후에만 렌더링하여 hydration 불일치 방지
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) {
+		return (
+			<Button
+				variant="ghost"
+				size="sm"
+				className={cn('h-9 w-9 p-0', className)}
+				aria-label="테마 전환"
+			>
+				<div className="h-5 w-5" />
+			</Button>
+		);
+	}
+
+	const isDark = theme === 'dark';
+
+	return (
+		<Button
+			variant="ghost"
+			size="sm"
+			className={cn('h-9 w-9 p-0', className)}
+			onClick={() => setTheme(isDark ? 'light' : 'dark')}
+			aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
+		>
+			{isDark ? (
+				<SunIcon className="h-5 w-5 transition-all" />
+			) : (
+				<MoonIcon className="h-5 w-5 transition-all" />
+			)}
+		</Button>
+	);
+}
+
+function SunIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className={className}
+		>
+			<circle cx="12" cy="12" r="4" />
+			<path d="M12 2v2" />
+			<path d="M12 20v2" />
+			<path d="m4.93 4.93 1.41 1.41" />
+			<path d="m17.66 17.66 1.41 1.41" />
+			<path d="M2 12h2" />
+			<path d="M20 12h2" />
+			<path d="m6.34 17.66-1.41 1.41" />
+			<path d="m19.07 4.93-1.41 1.41" />
+		</svg>
+	);
+}
+
+function MoonIcon({ className }: { className?: string }) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className={className}
+		>
+			<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+		</svg>
+	);
+}
