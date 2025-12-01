@@ -577,7 +577,6 @@ out/ 디렉토리에 정적 파일 생성
 | `gatsby-plugin-image`                 | `next/image`                           | 이미지 최적화    |
 | `gatsby-node.js` `createPages`        | App Router 동적 라우팅                 | 파일 시스템 기반 |
 | `react-helmet`                        | `generateMetadata`                     | SEO 메타데이터   |
-| `gatsby-plugin-feed`                  | Route Handler (`app/rss.xml/route.ts`) | RSS 피드         |
 | `gatsby-plugin-sitemap`               | `app/sitemap.ts`                       | 사이트맵         |
 | `gatsby-plugin-robots-txt`            | `app/robots.ts`                        | robots.txt       |
 | `gatsby-plugin-emotion`               | Tailwind CSS                           | 스타일링         |
@@ -585,18 +584,3 @@ out/ 디렉토리에 정적 파일 생성
 | `gatsby-ssr.js` / `gatsby-browser.js` | `app/layout.tsx` / `app/globals.css`   | 글로벌 설정      |
 
 ---
-
-## 마이그레이션 체크리스트
-
-- [ ] `gatsby-config.js` 제거
-- [ ] `gatsby-node.js` 제거
-- [ ] `gatsby-browser.js` 제거
-- [ ] `gatsby-ssr.js` 제거
-- [ ] GraphQL 쿼리 제거 및 파일 시스템 직접 읽기로 변경
-- [ ] `react-helmet` 제거 및 `generateMetadata`로 변경
-- [ ] `GatsbyImage` → `next/image`로 변경
-- [ ] Emotion → Tailwind CSS로 변경
-- [ ] `templates/` 디렉토리 → `app/` 디렉토리로 이동
-- [ ] `pages/` 디렉토리 → `app/` 디렉토리로 이동
-- [ ] RSS 피드를 Route Handler로 구현
-- [ ] 사이트맵 및 robots.txt를 App Router 방식으로 구현
