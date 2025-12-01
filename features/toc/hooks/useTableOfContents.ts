@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { extractHeadingsFromHtml, buildTocHierarchy, type TocItem } from '../utils/tocUtils';
 
 export interface UseTableOfContentsOptions {
@@ -70,9 +70,51 @@ export function useTableOfContents({ html }: UseTableOfContentsOptions) {
 	}, [tocItems]);
 
 	// 헤딩 클릭 시 스크롤
-	const scrollToHeading = (id: string) => {
-		const element = document.getElementById(id);
-		if (element) {
+	const scrollToHeading = useCallback(
+		(id: string) => {
+			// 먼저 ID로 요소 찾기 시도
+			let element = document.getElementById(id);
+
+			// ID로 찾지 못한 경우, tocItems에서 해당 ID의 텍스트를 찾아서 실제 DOM에서 검색
+			if (!element) {
+				const tocItem = tocItems.find((item) => item.id === id);
+				if (tocItem) {
+					// 실제 DOM에서 모든 헤딩을 찾아서 텍스트가 일치하는 요소 찾기
+					const allHeadings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+					for (const heading of allHeadings) {
+						if (heading.textContent?.trim() === tocItem.text) {
+							// ID가 없으면 설정
+							if (!heading.id) {
+								heading.id = id;
+							}
+							element = heading as HTMLElement;
+							break;
+						}
+					}
+				}
+			}
+
+			// 여전히 찾지 못한 경우, 짧은 지연 후 재시도 (MarkdownContent의 useEffect가 실행될 시간 확보)
+			if (!element) {
+				setTimeout(() => {
+					const retryElement = document.getElementById(id);
+					if (retryElement) {
+						const offset = 80; // 헤더 높이 고려
+						const elementPosition = retryElement.getBoundingClientRect().top + window.scrollY;
+						const offsetPosition = elementPosition - offset;
+
+						window.scrollTo({
+							top: offsetPosition,
+							behavior: 'smooth',
+						});
+
+						window.history.pushState(null, '', `#${id}`);
+					}
+				}, 100);
+				return;
+			}
+
+			// 요소를 찾은 경우 스크롤
 			const offset = 80; // 헤더 높이 고려
 			const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 			const offsetPosition = elementPosition - offset;
@@ -84,8 +126,9 @@ export function useTableOfContents({ html }: UseTableOfContentsOptions) {
 
 			// URL 해시 업데이트 (선택사항)
 			window.history.pushState(null, '', `#${id}`);
-		}
-	};
+		},
+		[tocItems]
+	);
 
 	return {
 		tocItems,
