@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 		title: "yeopto's Blog",
 		description: 'yeopto의 개발 성장 이야기',
 		type: 'website',
-		url: "https://yeopto.github.io",
-		images: ["/profile-image.png"],
+		url: 'https://yeopto.github.io',
+		images: ['/profile-image.png'],
 	},
 	twitter: {
 		card: 'summary_large_image',

@@ -67,10 +67,9 @@
 - [x] `features/toc/index.ts` - export 파일
 
 ### 3. SEO 최적화
-- [ ] `app/sitemap.ts` - 동적 사이트맵 생성
-- [ ] `app/robots.ts` - robots.txt 생성
-- [ ] `app/rss.xml/route.ts` - RSS 피드 생성
-- [ ] 구조화된 데이터 (JSON-LD) 추가
+- [x] `app/sitemap.ts` - 동적 사이트맵 생성
+- [x] `app/robots.ts` - robots.txt 생성
+- [x] 구조화된 데이터 (JSON-LD) 추가
 
 ### 4. 다크모드 구현
 - [ ] `components/common/ThemeProvider.tsx` - next-themes Provider

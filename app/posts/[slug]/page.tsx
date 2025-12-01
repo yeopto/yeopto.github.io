@@ -6,6 +6,7 @@ import { PostContent } from '@/features/post/components/PostContent';
 import { RelatedPosts } from '@/features/post/components/RelatedPosts';
 import { TableOfContents } from '@/features/toc';
 import { Container } from '@/components/ui/Container';
+import { StructuredData } from '@/components/common/StructuredData';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-static';
@@ -60,11 +61,12 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
 	return (
 		<Container className="my-12">
+			<StructuredData type="blogPosting" post={post} />
 			<div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
 				<article className="min-w-0">
-				<PostHeader post={post} />
-				<PostContent post={post} />
-			</article>
+					<PostHeader post={post} />
+					<PostContent post={post} />
+				</article>
 				<aside className="hidden lg:block">
 					{post.html && <TableOfContents html={post.html} />}
 				</aside>
